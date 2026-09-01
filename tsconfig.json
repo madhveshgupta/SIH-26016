@@ -1,0 +1,21 @@
+{
+  "//": "Root tsconfig — covers backend/, prisma/ and scripts/. The Next.js app has its own at frontend/tsconfig.json.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["esnext"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@backend/*": ["./backend/*"]
+    }
+  },
+  "include": ["backend/**/*.ts", "prisma/**/*.ts", "scripts/**/*.ts"],
+  "exclude": ["node_modules", "frontend", ".next"]
+}
