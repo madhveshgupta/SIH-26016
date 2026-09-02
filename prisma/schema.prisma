@@ -1,0 +1,1263 @@
+// Bhoomi Nayan — National Land Acquisition & Management System (SIH PS 26016)
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+/// Which statute an acquisition runs under.
+enum AcquisitionAct {
+  LARR_2013
+  NH_ACT_1956
+  RAILWAYS_ACT_1989
+  STATE_ACT
+}
+
+enum ProjectType {
+  HIGHWAY
+  RAILWAY
+  IRRIGATION
+  INDUSTRIAL_CORRIDOR
+  URBAN_DEVELOPMENT
+  RENEWABLE_ENERGY
+  MINING
+  DEFENCE
+  OTHER
+}
+
+/// The stakeholder groups named in the problem statement, plus admin and the citizen role that
+/// makes this a transparency tool rather than an office tool.
+enum RoleType {
+  SUPER_ADMIN
+  LAND_REQUIRING_BODY
+  LAND_ACQUIRING_AUTHORITY
+  DISTRICT_COLLECTOR
+  STATE_GOVERNMENT
+  CENTRAL_MINISTRY
+  REHABILITATION_AUTHORITY
+  LANDOWNER
+}
+
+/// Jurisdiction tier. Determines the scope guard: a DISTRICT user sees only their district, a
+/// NATIONAL user sees everything.
+enum JurisdictionLevel {
+  NATIONAL
+  STATE
+  DISTRICT
+  TEHSIL
+  VILLAGE
+}
+
+/// The 17-stage LARR chain plus exception states.
+enum ProposalStatus {
+  DRAFT
+  SUBMITTED
+  DISTRICT_SCRUTINY
+  SIA_ORDERED
+  SIA_STUDY
+  SIA_APPRAISAL
+  STATE_APPROVAL
+  SEC_11_PRELIM_NOTIFICATION
+  OBJECTIONS
+  SEC_19_DECLARATION
+  SEC_21_NOTICE
+  AWARD_ENQUIRY
+  AWARD_DECLARED
+  COMPENSATION_DISBURSEMENT
+  RNR_IMPLEMENTATION
+  POSSESSION
+  CLOSED
+  RETURNED_FOR_CLARIFICATION
+  REJECTED
+  LAPSED
+  URGENCY_FAST_TRACK
+}
+
+enum ParcelStatus {
+  PROPOSED
+  NOTIFIED
+  OBJECTED
+  AWARD_DECLARED
+  COMPENSATED
+  POSSESSED
+  DISPUTED
+  WITHDRAWN
+}
+
+enum ParcelGeometryKind {
+  /// Vertices supplied directly by an authoritative survey source.
+  SURVEYED
+  /// The state's surveyed boundary, traced from its own single-plot rendering and verified against
+  /// the portal's reported extent (see plot-boundary.ts).
+  TRACED
+  /// A real field outline from OpenStreetMap — not a revenue-record plot.
+  OSM_FIELD
+  /// Generated beside a real village where no public boundary exists.
+  GENERATED
+  /// Only a bounding box — never drawn as a parcel outline.
+  ENVELOPE
+}
+
+enum LandUseType {
+  IRRIGATED
+  DRY
+  BARREN
+  HOMESTEAD
+  COMMERCIAL
+  INDUSTRIAL
+  FOREST
+  WATER_BODY
+}
+
+enum NotificationType {
+  SEC_4_2_SIA // LARR s.4(2) — SIA commencement (s.4(1) is the duty, 4(2) is published)
+  SEC_11_PRELIMINARY // LARR s.11
+  SEC_19_DECLARATION // LARR s.19
+  SEC_21_NOTICE // LARR s.21
+  NH_3A_PRELIMINARY // NH Act s.3A
+  NH_3D_DECLARATION // NH Act s.3D
+  NH_3G_COMPENSATION // NH Act s.3G
+  CORRIGENDUM
+  WITHDRAWAL
+}
+
+enum ObjectionStatus {
+  FILED
+  UNDER_REVIEW
+  HEARING_SCHEDULED
+  HEARD
+  ACCEPTED
+  PARTIALLY_ACCEPTED
+  REJECTED
+  WITHDRAWN
+}
+
+/// What a citizen says is wrong.
+enum GrievanceCategory {
+  COMPENSATION_AMOUNT
+  AREA_MEASUREMENT
+  MAP_BOUNDARY
+  ACQUISITION_ITSELF
+  ASSETS_NOT_RECORDED
+  INTERESTED_PERSON
+  PAYMENT_NOT_RECEIVED
+  RNR_ENTITLEMENT
+  POSSESSION_BEFORE_PAYMENT
+  OTHER
+}
+
+enum GrievanceStatus {
+  SUBMITTED
+  ACKNOWLEDGED
+  UNDER_EXAMINATION
+  /// Sent onward to the body that decides it, e.g. s.64 to the LARR Authority.
+  REFERRED
+  RESOLVED
+  REJECTED
+  WITHDRAWN
+}
+
+enum PaymentStatus {
+  PENDING
+  INSTRUCTED
+  PARTIALLY_PAID
+  PAID
+  DISPUTED
+  DEPOSITED_WITH_AUTHORITY // LARR s.77 — with the LARR Authority, NOT a court
+  FAILED
+}
+
+/// The law treats these categories differently.
+enum FamilyCategory {
+  LANDOWNER
+  AGRICULTURAL_LABOURER
+  TENANT
+  SHARECROPPER
+  ARTISAN
+  FOREST_DWELLER
+  SC
+  ST
+  OTHER
+}
+
+enum RnRStatus {
+  IDENTIFIED
+  ENTITLEMENT_DETERMINED
+  AWARD_PASSED
+  PAYMENT_MADE
+  RESETTLED
+  LIVELIHOOD_RESTORED
+  DISPUTED
+}
+
+enum AlertSeverity {
+  INFO
+  WARNING
+  CRITICAL
+  STATUTORY_LAPSE_RISK
+}
+
+enum AlertChannel {
+  IN_APP
+  EMAIL
+  SMS
+  PUSH
+}
+
+enum ConsentStatus {
+  PENDING
+  GRANTED
+  REFUSED
+  WITHDRAWN
+}
+
+enum MilestoneStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  DELAYED
+  BLOCKED
+}
+
+enum IntegrationSystem {
+  LAND_RECORDS
+  CADASTRAL
+  PAYMENTS
+  E_GAZETTE
+  SMS_GATEWAY
+  EMAIL
+  ML_SERVICE
+  /// Open GIS services: OpenStreetMap (Overpass, Nominatim), Open-Meteo elevation.
+  OPEN_GIS
+}
+
+// ============================================================================
+// 1. ADMINISTRATIVE GEOGRAPHY  (seeded from real LGD codes)
+// ============================================================================
+
+model State {
+  id               String   @id @default(cuid())
+  /// Official LGD (Local Government Directory) state code, e.g. "09" for UP
+  lgdCode          String   @unique
+  name             String
+  nameLocal        String?
+  isUT             Boolean  @default(false)
+  /// Bhu-Naksha cadastral portal config — null where no portal is reachable.
+  cadastralBaseUrl String?
+  cadastralGen     String? // "classic" | "angular"
+  cadastralCode    String? // state code as that portal expects it
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  districts District[]
+  projects  ProjectState[]
+  users     User[]
+
+  @@index([lgdCode])
+}
+
+model District {
+  id                   String   @id @default(cuid())
+  lgdCode              String
+  name                 String
+  nameLocal            String?
+  stateId              String
+  state                State    @relation(fields: [stateId], references: [id], onDelete: Cascade)
+  /// Circle-rate multiplier under LARR First Schedule: 1.0-2.0 rural by distance from urban centre,
+  /// 1.0 urban.
+  multiplierFactor     Decimal  @default(1.0) @db.Decimal(3, 2)
+  /// Default circle rate, rupees per hectare.
+  circleRatePerHectare Decimal? @db.Decimal(14, 2)
+  isUrban              Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  tehsils  Tehsil[]
+  parcels  LandParcel[]
+  users    User[]
+  projects ProjectDistrict[]
+
+  @@unique([stateId, lgdCode])
+  @@index([stateId])
+}
+
+model Tehsil {
+  id         String   @id @default(cuid())
+  lgdCode    String
+  name       String
+  nameLocal  String?
+  districtId String
+  district   District @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  villages Village[]
+  users    User[]
+
+  @@unique([districtId, lgdCode])
+  @@index([districtId])
+}
+
+model Village {
+  id               String   @id @default(cuid())
+  lgdCode          String
+  name             String
+  nameLocal        String?
+  tehsilId         String
+  tehsil           Tehsil   @relation(fields: [tehsilId], references: [id], onDelete: Cascade)
+  /// Census 2011 figures — used to derive realistic affected-family counts and to drive the Third
+  /// Schedule resettlement amenity gap.
+  censusHouseholds Int?
+  censusPopulation Int?
+  hasSchool        Boolean  @default(false)
+  hasHealthCentre  Boolean  @default(false)
+  hasDrinkingWater Boolean  @default(false)
+  hasElectricity   Boolean  @default(false)
+  hasRoadAccess    Boolean  @default(false)
+  /// Bhu-Naksha gisCode for this village, where the state's portal is reachable
+  cadastralGisCode String?
+  createdAt        DateTime @default(now())
+
+  parcels  LandParcel[]
+  families AffectedFamily[]
+
+  @@unique([tehsilId, lgdCode])
+  @@index([tehsilId])
+}
+
+// ============================================================================
+// 2. ORGANISATIONS & PEOPLE
+// ============================================================================
+
+model Ministry {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+
+  agencies Agency[]
+  projects Project[]
+}
+
+model Agency {
+  id              String    @id @default(cuid())
+  code            String    @unique
+  name            String
+  /// True if this body can submit acquisition proposals (a Land Requiring Body)
+  isRequiringBody Boolean   @default(true)
+  ministryId      String?
+  ministry        Ministry? @relation(fields: [ministryId], references: [id])
+  createdAt       DateTime  @default(now())
+
+  users    User[]
+  projects Project[]
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  type        RoleType @unique
+  name        String
+  description String?
+  /// Permission matrix as {resource: [actions]} — one config surface so an auditor can
+  /// see exactly what each role may do.
+  permissions Json     @default("{}")
+  createdAt   DateTime @default(now())
+
+  users User[]
+}
+
+model User {
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  phone               String?   @unique
+  passwordHash        String
+  fullName            String
+  designation         String?
+  isActive            Boolean   @default(true)
+  mustChangePassword  Boolean   @default(true)
+  failedLoginAttempts Int       @default(0)
+  lockedUntil         DateTime?
+  lastLoginAt         DateTime?
+  preferredLocale     String    @default("en")
+
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id])
+
+  /// Jurisdiction scoping — the heart of RBAC here.
+  jurisdictionLevel JurisdictionLevel @default(DISTRICT)
+  stateId           String?
+  state             State?            @relation(fields: [stateId], references: [id])
+  districtId        String?
+  district          District?         @relation(fields: [districtId], references: [id])
+  tehsilId          String?
+  tehsil            Tehsil?           @relation(fields: [tehsilId], references: [id])
+  agencyId          String?
+  agency            Agency?           @relation(fields: [agencyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  auditLogs          AuditLog[]
+  proposalsCreated   Proposal[]        @relation("ProposalCreatedBy")
+  stageActions       ProposalStage[]
+  documents          Document[]
+  documentVersions   DocumentVersion[]
+  objectionsFiled    Objection[]
+  grievancesFiled    Grievance[]       @relation("GrievanceFiledBy")
+  grievancesAssigned Grievance[]       @relation("GrievanceAssignedTo")
+  alerts             Alert[]
+  ownerProfile       Owner?
+  dashboardLayout    DashboardLayout?
+  reportTemplates    ReportTemplate[]  @relation("ReportTemplateOwner")
+  fieldSurveys       FieldSurvey[]     @relation("FieldSurveyor")
+  reportSchedules    ReportSchedule[]  @relation("ReportScheduleCreatedBy")
+
+  @@index([roleId])
+  @@index([stateId, districtId])
+}
+
+/// A survey recorded in the field, on a phone, usually with no signal.
+model FieldSurvey {
+  id         String          @id @default(cuid())
+  /// The identifier generated on the device, unique per device.
+  clientId   String          @unique
+  parcelId   String
+  parcel     LandParcel      @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  surveyorId String
+  surveyor   User            @relation("FieldSurveyor", fields: [surveyorId], references: [id])
+  kind       FieldSurveyKind @default(JOINT_MEASUREMENT)
+
+  /// When the surveyor recorded it, from the device clock.
+  capturedAt DateTime
+  /// When it reached the server. The gap is how long the phone was offline.
+  syncedAt   DateTime @default(now())
+
+  /// Boundary walked on the ground: [[lng, lat], ...] with GPS accuracy in metres.
+  boundary           Json?
+  accuracyM          Decimal? @db.Decimal(8, 2)
+  /// Area computed from the walked boundary, for comparison with the record.
+  walkedAreaHectares Decimal? @db.Decimal(14, 4)
+
+  /// What the surveyor found: structures, trees, crops, occupants.
+  findings       Json?
+  notes          String?
+  /// Geo-tagged photographs, as stored document ids with their coordinates.
+  photos         Json?
+  /// The landowner's signature, captured on the device.
+  signatureDocId String?
+  signedBy       String?
+
+  @@index([parcelId])
+  @@index([surveyorId])
+}
+
+enum FieldSurveyKind {
+  JOINT_MEASUREMENT
+  STRUCTURE_ENUMERATION
+  CROP_AND_TREE
+  FAMILY_SURVEY
+  POSSESSION_PROOF
+  ANOMALY_VERIFICATION
+}
+
+/// A saved custom report: the entity, columns, filters and grouping a user built in the report
+/// builder, so they can run it again next month.
+model ReportTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  /// Which registry report this is based on, or null for a custom build.
+  baseReport  String?
+  /// Entity, columns, filters and grouping — the builder's own definition.
+  definition  Json
+  ownerId     String
+  owner       User     @relation("ReportTemplateOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  /// Visible to everyone in the owner's jurisdiction, not just the author.
+  isShared    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  schedules ReportSchedule[]
+
+  @@index([ownerId])
+}
+
+/// A report that runs on its own and is emailed.
+model ReportSchedule {
+  id          String          @id @default(cuid())
+  templateId  String?
+  template    ReportTemplate? @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  /// A registry report key, where this schedule is not for a saved template.
+  reportKey   String?
+  frequency   ReportFrequency
+  /// Where it goes. Email addresses, not user ids: recipients leave, reports stay.
+  recipients  String[]
+  format      String          @default("PDF")
+  isActive    Boolean         @default(true)
+  lastRunAt   DateTime?
+  lastRunNote String?
+  nextRunAt   DateTime
+  createdById String
+  createdBy   User            @relation("ReportScheduleCreatedBy", fields: [createdById], references: [id])
+  createdAt   DateTime        @default(now())
+
+  @@index([isActive, nextRunAt])
+}
+
+enum ReportFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+/// A user's own arrangement of the dashboard: which widgets they keep and in what order.
+model DashboardLayout {
+  userId    String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Widget keys in display order; anything not listed is hidden.
+  widgets   String[]
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================================
+// 3. PROJECTS & PROPOSALS
+// ============================================================================
+
+model Project {
+  id           String         @id @default(cuid())
+  referenceNo  String         @unique
+  name         String
+  description  String?
+  type         ProjectType
+  /// Which statute governs this project. Highways => NH_ACT_1956.
+  governingAct AcquisitionAct @default(LARR_2013)
+  ministryId   String?
+  ministry     Ministry?      @relation(fields: [ministryId], references: [id])
+  agencyId     String
+  agency       Agency         @relation(fields: [agencyId], references: [id])
+
+  estimatedAreaHectares Decimal? @db.Decimal(14, 4)
+  estimatedCostCrore    Decimal? @db.Decimal(14, 2)
+  /// LARR s.2(2): 70% landowner consent for PPP, 80% for private companies.
+  consentThresholdPct   Int?
+  isPPP                 Boolean  @default(false)
+  isPrivateCompany      Boolean  @default(false)
+
+  /// Proposed alignment centreline, WGS84 — for linear projects (highway, canal, railway), the line
+  /// the right-of-way is measured from.
+  alignment   Unsupported("geometry(LineString, 4326)")?
+  rightOfWayM Int?
+
+  plannedStartDate DateTime?
+  plannedEndDate   DateTime?
+  actualStartDate  DateTime?
+  actualEndDate    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  proposals   Proposal[]
+  parcels     LandParcel[]
+  milestones  Milestone[]
+  states      ProjectState[]
+  districts   ProjectDistrict[]
+  predictions MLPrediction[]
+
+  @@index([type])
+  @@index([agencyId])
+}
+
+/// A project can span several states; acquisition is still administered per state.
+model ProjectState {
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  stateId   String
+  state     State   @relation(fields: [stateId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, stateId])
+}
+
+model ProjectDistrict {
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  districtId String
+  district   District @relation(fields: [districtId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, districtId])
+}
+
+model Proposal {
+  id          String         @id @default(cuid())
+  /// Format LA/<STATE>/<DIST>/<YYYY>/<SEQ> — the number a farmer quotes
+  referenceNo String         @unique
+  projectId   String
+  project     Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  status      ProposalStatus @default(DRAFT)
+
+  purpose              String?
+  publicInterestNote   String?
+  proposedAreaHectares Decimal? @db.Decimal(14, 4)
+  acquiredAreaHectares Decimal? @db.Decimal(14, 4)
+  requiresSIA          Boolean  @default(true)
+  isUrgency            Boolean  @default(false) // LARR s.40 / NH Act urgency
+
+  createdById       String
+  createdBy         User      @relation("ProposalCreatedBy", fields: [createdById], references: [id])
+  /// Whose desk it is on right now. Null once closed.
+  currentHolderRole RoleType?
+
+  submittedAt DateTime?
+  closedAt    DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  stages        ProposalStage[]
+  notifications Notification[]
+  objections    Objection[]
+  grievances    Grievance[]
+  awards        Award[]
+  documents     Document[]
+  consents      Consent[]
+  alerts        Alert[]
+  predictions   MLPrediction[]
+  parcels       LandParcel[]
+
+  @@index([projectId])
+  @@index([status])
+}
+
+/// One row per hop through the workflow.
+model ProposalStage {
+  id         String         @id @default(cuid())
+  proposalId String
+  proposal   Proposal       @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  stage      ProposalStatus
+  actorId    String?
+  actor      User?          @relation(fields: [actorId], references: [id])
+  actorRole  RoleType?
+
+  action    String? // APPROVE | REJECT | RETURN | FORWARD
+  remarks   String?
+  checklist Json? // digital scrutiny: per-item pass/fail with notes
+
+  enteredAt         DateTime  @default(now())
+  exitedAt          DateTime?
+  /// SLA in days for this stage, copied from the workflow definition at entry so later config
+  /// changes don't rewrite history.
+  slaDays           Int?
+  /// Statutory deadline for this stage, if the Act sets one.
+  statutoryDeadline DateTime?
+
+  @@index([proposalId])
+  @@index([stage])
+}
+
+// ============================================================================
+// 4. LAND PARCELS  (PostGIS — the technical heart of the GIS features)
+// ============================================================================
+
+model LandParcel {
+  id         String    @id @default(cuid())
+  /// ULPIN-style 14-character national parcel identifier.
+  ulpin      String?   @unique
+  /// Survey/subdivision format as used on real cadastral records, e.g. "347/8"
+  khasraNo   String
+  projectId  String
+  project    Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  proposalId String?
+  proposal   Proposal? @relation(fields: [proposalId], references: [id])
+
+  villageId  String
+  village    Village  @relation(fields: [villageId], references: [id])
+  districtId String
+  district   District @relation(fields: [districtId], references: [id])
+
+  /// Declared area from the revenue record.
+  declaredAreaHectares Decimal  @db.Decimal(14, 4)
+  /// Area computed by PostGIS ST_Area from the geometry.
+  computedAreaHectares Decimal? @db.Decimal(14, 4)
+
+  landUse LandUseType  @default(DRY)
+  status  ParcelStatus @default(PROPOSED)
+
+  /// Real geometry, WGS84.
+  geom              Unsupported("geometry(Polygon, 4326)")?
+  /// SURVEYED / TRACED are real boundaries; ENVELOPE is only a portal extent.
+  geometryKind      ParcelGeometryKind                      @default(ENVELOPE)
+  /// Worst-case distance between the traced boundary and the portal's own reported extent, metres.
+  boundaryAccuracyM Decimal?                                @db.Decimal(6, 3)
+  /// False when the state record publishes no area for the plot (e.g. an unnumbered road strip) —
+  /// the declared area then mirrors the geometry and must not be read as a revenue figure.
+  areaFromRecord    Boolean                                 @default(true)
+  /// The portal's own plot id, so a boundary can be re-fetched and audited.
+  sourcePlotId      String?
+  /// Distance along the project alignment, metres — orders a corridor's plots.
+  chainageM         Int?
+  /// The boundary as numbered survey points, with elevation.
+  vertices          ParcelVertex[]
+  centroidLat       Decimal?                                @db.Decimal(10, 7)
+  centroidLng       Decimal?                                @db.Decimal(10, 7)
+
+  /// Set true when ST_Intersects finds this parcel overlapping another project's parcel — the
+  /// conflict-detection differentiator.
+  hasConflict Boolean @default(false)
+
+  /// Where the geometry came from, so the UI can label LIVE / CACHED / SIMULATED (portals flap; see
+  /// the cadastral adapters' resilience notes).
+  dataSource     String    @default("SIMULATED")
+  sourceSyncedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owners        ParcelOwner[]
+  compensations CompensationRecord[]
+  possession    PossessionRecord?
+  objections    Objection[]
+  grievances    Grievance[]
+  awards        Award[]
+  predictions   MLPrediction[]
+  fieldSurveys  FieldSurvey[]
+
+  @@unique([projectId, khasraNo, villageId])
+  @@index([projectId])
+  @@index([villageId])
+  @@index([status])
+  @@index([hasConflict])
+}
+
+model Owner {
+  id                String   @id @default(cuid())
+  fullName          String
+  fatherName        String?
+  phone             String?
+  /// PII. Encrypted at field level.
+  aadhaarLast4      String?
+  bankAccountMasked String?
+  bankIfsc          String?
+  address           String?
+  /// Optional login, so a landowner can see their own case (citizen portal).
+  userId            String?  @unique
+  user              User?    @relation(fields: [userId], references: [id])
+  createdAt         DateTime @default(now())
+
+  parcels       ParcelOwner[]
+  compensations CompensationRecord[]
+  consents      Consent[]
+  families      AffectedFamily[]
+  grievances    Grievance[]
+}
+
+/// Indian agricultural land is very often jointly held. Share is a fraction of 1.
+model ParcelOwner {
+  parcelId String
+  parcel   LandParcel @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  ownerId  String
+  owner    Owner      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  sharePct Decimal    @default(100.00) @db.Decimal(6, 3)
+
+  @@id([parcelId, ownerId])
+}
+
+// ============================================================================
+// 5. STATUTORY NOTIFICATIONS, OBJECTIONS, CONSENT
+// ============================================================================
+
+model Notification {
+  id                  String           @id @default(cuid())
+  proposalId          String
+  proposal            Proposal         @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  type                NotificationType
+  gazetteRef          String?
+  issuedOn            DateTime
+  /// The Act requires publication in ALL of these.
+  publishedGazette    Boolean          @default(false)
+  publishedNewspaper1 Boolean          @default(false)
+  publishedNewspaper2 Boolean          @default(false)
+  publishedLocalLang  Boolean          @default(false)
+  publishedPanchayat  Boolean          @default(false)
+  publishedWebsite    Boolean          @default(false)
+
+  /// The deadline this notification starts running. e.g. s.19 declaration starts a 12-month clock
+  /// to the award, after which proceedings LAPSE (s.25).
+  startsDeadlineAt DateTime?
+  documentId       String?
+  createdAt        DateTime  @default(now())
+
+  @@index([proposalId])
+  @@index([type])
+}
+
+model Objection {
+  id              String          @id @default(cuid())
+  proposalId      String
+  proposal        Proposal        @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  parcelId        String?
+  parcel          LandParcel?     @relation(fields: [parcelId], references: [id])
+  /// Filed online by a landowner, or recorded by an officer for a walk-in.
+  filedByUserId   String?
+  filedByUser     User?           @relation(fields: [filedByUserId], references: [id])
+  objectorName    String
+  objectorPhone   String?
+  grounds         String
+  status          ObjectionStatus @default(FILED)
+  hearingDate     DateTime?
+  decision        String?
+  /// Legally required. "Rejected" with no reasoning gets an acquisition quashed.
+  decisionReasons String?
+  decidedAt       DateTime?
+  filedAt         DateTime        @default(now())
+
+  /// Set when the objection was raised through the citizen grievance flow.
+  grievance Grievance?
+
+  @@index([proposalId])
+  @@index([status])
+}
+
+/// A citizen's representation about their own acquisition.
+model Grievance {
+  id          String            @id @default(cuid())
+  referenceNo String            @unique
+  category    GrievanceCategory
+  proposalId  String?
+  proposal    Proposal?         @relation(fields: [proposalId], references: [id])
+  parcelId    String?
+  parcel      LandParcel?       @relation(fields: [parcelId], references: [id])
+
+  filedByUserId String
+  filedByUser   User    @relation("GrievanceFiledBy", fields: [filedByUserId], references: [id])
+  /// The Owner record the citizen files as, where they have one.
+  ownerId       String?
+  owner         Owner?  @relation(fields: [ownerId], references: [id])
+
+  /// The template's answers, field by field, as the citizen gave them.
+  detailsJson    Json
+  /// The formal representation composed from those answers — what the officer reads.
+  representation String
+  /// The statutory route, fixed at filing so a later change of law cannot silently rewrite what
+  /// this person was told.
+  statuteSection String
+  authorityLabel String
+  authorityRole  RoleType
+  /// The officer it reached. Null where no such officer is posted yet.
+  assignedToId   String?
+  assignedTo     User?    @relation("GrievanceAssignedTo", fields: [assignedToId], references: [id])
+
+  /// Set when this also entered the statutory objection pipeline.
+  objectionId String?    @unique
+  objection   Objection? @relation(fields: [objectionId], references: [id])
+
+  status          GrievanceStatus @default(SUBMITTED)
+  decision        String?
+  /// Required to close one. A refusal with no reasons is not a decision.
+  decisionReasons String?
+  decidedAt       DateTime?
+  filedAt         DateTime        @default(now())
+
+  @@index([filedByUserId])
+  @@index([assignedToId, status])
+  @@index([status])
+  @@index([category])
+}
+
+model Consent {
+  id          String        @id @default(cuid())
+  proposalId  String
+  proposal    Proposal      @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  ownerId     String
+  owner       Owner         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  status      ConsentStatus @default(PENDING)
+  /// OTP + geo-stamp, because paper consent collection is a known site of forgery
+  otpVerified Boolean       @default(false)
+  capturedLat Decimal?      @db.Decimal(10, 7)
+  capturedLng Decimal?      @db.Decimal(10, 7)
+  capturedAt  DateTime?
+  createdAt   DateTime      @default(now())
+
+  @@unique([proposalId, ownerId])
+  @@index([proposalId])
+}
+
+// ============================================================================
+// 6. AWARDS & COMPENSATION  (LARR ss.23-31)
+// ============================================================================
+
+model Award {
+  id           String      @id @default(cuid())
+  awardNo      String      @unique
+  proposalId   String
+  proposal     Proposal    @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  parcelId     String?
+  parcel       LandParcel? @relation(fields: [parcelId], references: [id])
+  enquiryNotes String?
+  declaredOn   DateTime
+  publishedOn  DateTime?
+  totalAmount  Decimal     @db.Decimal(16, 2)
+  /// True for the separate R&R award under LARR s.31, which the Act requires to be distinct from
+  /// the land award.
+  isRnRAward   Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+
+  compensations CompensationRecord[]
+
+  @@index([proposalId])
+}
+
+/// The transparent compensation breakdown — every line shown to the landowner.
+model CompensationRecord {
+  id       String     @id @default(cuid())
+  parcelId String
+  parcel   LandParcel @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  ownerId  String
+  owner    Owner      @relation(fields: [ownerId], references: [id])
+  awardId  String?
+  award    Award?     @relation(fields: [awardId], references: [id])
+
+  /// s.26 — highest of: circle rate / avg of top 50% sale deeds / consented amount
+  marketValuePerHectare Decimal @db.Decimal(14, 2)
+  marketValueBasis      String  @default("CIRCLE_RATE")
+  areaHectares          Decimal @db.Decimal(14, 4)
+  /// First Schedule multiplier, 1.0-2.0
+  multiplierFactor      Decimal @db.Decimal(3, 2)
+  landValue             Decimal @db.Decimal(16, 2)
+
+  /// ss.27-29 — a farm is not just soil.
+  treesValue        Decimal @default(0) @db.Decimal(16, 2)
+  structuresValue   Decimal @default(0) @db.Decimal(16, 2)
+  wellsValue        Decimal @default(0) @db.Decimal(16, 2)
+  standingCropValue Decimal @default(0) @db.Decimal(16, 2)
+  assetsSubtotal    Decimal @default(0) @db.Decimal(16, 2)
+
+  subTotal          Decimal @db.Decimal(16, 2)
+  /// s.30 — 100% solatium, in recognition of the forced nature of the sale.
+  solatium          Decimal @db.Decimal(16, 2)
+  /// s.30(3) — 12% p.a. from the s.4(2) SIA notification until the award OR possession, whichever
+  /// is earlier.
+  interestAmount    Decimal @default(0) @db.Decimal(16, 2)
+  totalCompensation Decimal @db.Decimal(16, 2)
+
+  /// Share for this owner where the parcel is jointly held.
+  ownerSharePct  Decimal @default(100.00) @db.Decimal(6, 3)
+  payableToOwner Decimal @db.Decimal(16, 2)
+
+  assessedAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  payments Payment[]
+
+  @@index([parcelId])
+  @@index([ownerId])
+}
+
+model Payment {
+  id             String             @id @default(cuid())
+  compensationId String
+  compensation   CompensationRecord @relation(fields: [compensationId], references: [id], onDelete: Cascade)
+  amount         Decimal            @db.Decimal(16, 2)
+  status         PaymentStatus      @default(PENDING)
+  /// PFMS-style reference from the payments adapter
+  utrNumber      String?
+  instructedAt   DateTime?
+  paidAt         DateTime?
+  failureReason  String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([compensationId])
+  @@index([status])
+}
+
+// ============================================================================
+// 7. REHABILITATION & RESETTLEMENT  (LARR s.31, Second & Third Schedules)
+// ============================================================================
+
+model AffectedFamily {
+  id                  String         @id @default(cuid())
+  familyHeadName      String
+  ownerId             String?
+  owner               Owner?         @relation(fields: [ownerId], references: [id])
+  villageId           String
+  village             Village        @relation(fields: [villageId], references: [id])
+  category            FamilyCategory
+  memberCount         Int            @default(1)
+  /// The problem statement asks for BOTH numbers.
+  isDisplaced         Boolean        @default(false)
+  livelihoodDependent Boolean        @default(false)
+  status              RnRStatus      @default(IDENTIFIED)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  entitlements RnREntitlement[]
+  siteId       String?
+  site         ResettlementSite? @relation(fields: [siteId], references: [id])
+
+  @@index([villageId])
+  @@index([status])
+  @@index([isDisplaced])
+}
+
+/// Second Schedule entitlements.
+model RnREntitlement {
+  id              String         @id @default(cuid())
+  familyId        String
+  family          AffectedFamily @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  /// e.g. HOUSING_UNIT, RESETTLEMENT_ALLOWANCE, TRANSPORT_ALLOWANCE, SUBSISTENCE_GRANT_12M,
+  /// ANNUITY_OR_JOB, CATTLE_SHED, ARTISAN_WORKSHOP, LAND_FOR_LAND, SC_ST_ADDITIONAL
+  entitlementType String
+  description     String?
+  amount          Decimal?       @db.Decimal(16, 2)
+  isInKind        Boolean        @default(false)
+  status          RnRStatus      @default(ENTITLEMENT_DETERMINED)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  payments RnRPayment[]
+
+  @@index([familyId])
+}
+
+model RnRPayment {
+  id            String         @id @default(cuid())
+  entitlementId String
+  entitlement   RnREntitlement @relation(fields: [entitlementId], references: [id], onDelete: Cascade)
+  amount        Decimal        @db.Decimal(16, 2)
+  status        PaymentStatus  @default(PENDING)
+  utrNumber     String?
+  paidAt        DateTime?
+  createdAt     DateTime       @default(now())
+
+  @@index([entitlementId])
+}
+
+/// Third Schedule requires these amenities at resettlement sites.
+model ResettlementSite {
+  id                   String   @id @default(cuid())
+  name                 String
+  lat                  Decimal? @db.Decimal(10, 7)
+  lng                  Decimal? @db.Decimal(10, 7)
+  totalPlots           Int      @default(0)
+  allottedPlots        Int      @default(0)
+  hasRoad              Boolean  @default(false)
+  hasDrainage          Boolean  @default(false)
+  hasSchool            Boolean  @default(false)
+  hasHealthCentre      Boolean  @default(false)
+  hasDrinkingWater     Boolean  @default(false)
+  hasElectricity       Boolean  @default(false)
+  hasPanchayatBuilding Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  families AffectedFamily[]
+}
+
+// ============================================================================
+// 8. POSSESSION & MILESTONES
+// ============================================================================
+
+/// LARR s.38: possession only AFTER full payment.
+model PossessionRecord {
+  id               String     @id @default(cuid())
+  parcelId         String     @unique
+  parcel           LandParcel @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  takenOn          DateTime
+  panchnamaDocId   String?
+  certificateDocId String?
+  /// Geo-tagged, timestamped proof of what the land looked like at handover.
+  photoLat         Decimal?   @db.Decimal(10, 7)
+  photoLng         Decimal?   @db.Decimal(10, 7)
+  handedOverBy     String?
+  receivedBy       String?
+  remarks          String?
+  createdAt        DateTime   @default(now())
+}
+
+model Milestone {
+  id              String          @id @default(cuid())
+  projectId       String
+  project         Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  plannedDate     DateTime
+  actualDate      DateTime?
+  status          MilestoneStatus @default(NOT_STARTED)
+  percentComplete Int             @default(0)
+  /// Days late, computed.
+  slippageDays    Int?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([projectId])
+  @@index([status])
+}
+
+// ============================================================================
+// 9. DOCUMENTS
+// ============================================================================
+
+model Document {
+  id               String    @id @default(cuid())
+  title            String
+  category         String
+  proposalId       String?
+  proposal         Proposal? @relation(fields: [proposalId], references: [id])
+  uploadedById     String
+  uploadedBy       User      @relation(fields: [uploadedById], references: [id])
+  currentVersion   Int       @default(1)
+  /// QR verification code printed on generated statutory documents.
+  verificationCode String?   @unique
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  versions DocumentVersion[]
+
+  @@index([proposalId])
+  @@index([category])
+}
+
+/// Re-uploading creates v2; v1 is never destroyed.
+model DocumentVersion {
+  id           String   @id @default(cuid())
+  documentId   String
+  document     Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  version      Int
+  storageKey   String
+  fileName     String
+  mimeType     String
+  sizeBytes    Int
+  checksum     String?
+  uploadedById String
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  createdAt    DateTime @default(now())
+
+  @@unique([documentId, version])
+  @@index([documentId])
+}
+
+// ============================================================================
+// 10. ALERTS, AUDIT, INTEGRATIONS, ML
+// ============================================================================
+
+model Alert {
+  id              String         @id @default(cuid())
+  /// e.g. SLA_BREACH, STATUTORY_DEADLINE_30D, LAPSE_IMMINENT, COMPENSATION_UNPAID_30D,
+  /// MILESTONE_OVERDUE, POSSESSION_BLOCKED
+  type            String
+  severity        AlertSeverity  @default(INFO)
+  title           String
+  message         String
+  proposalId      String?
+  proposal        Proposal?      @relation(fields: [proposalId], references: [id])
+  recipientId     String
+  recipient       User           @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  channels        AlertChannel[]
+  isRead          Boolean        @default(false)
+  readAt          DateTime?
+  /// Set when this alert was raised to a superior at 2x SLA.
+  escalatedFromId String?
+  /// What this alert is about, e.g. "SLA:<stageId>:2".
+  dedupeKey       String?
+  deliveredAt     DateTime?
+  createdAt       DateTime       @default(now())
+
+  @@unique([recipientId, dedupeKey])
+  @@index([recipientId, isRead])
+  @@index([severity])
+  @@index([proposalId])
+}
+
+/// Tamper-evident audit chain.
+model AuditLog {
+  id         String   @id @default(cuid())
+  /// Monotonic position in the chain. Gaps or reordering are themselves evidence.
+  sequence   BigInt   @unique @default(autoincrement())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id])
+  action     String // CREATE | UPDATE | DELETE | LOGIN | VIEW | DOWNLOAD
+  entityType String
+  entityId   String
+  beforeJson Json?
+  afterJson  Json?
+  ipAddress  String?
+  userAgent  String?
+  /// SHA-256 of the previous record's hash + this record's canonical payload.
+  prevHash   String?
+  hash       String
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([actorId])
+  @@index([createdAt])
+}
+
+/// Every external call logged with request, response, latency and retry state, so the Integration
+/// Health dashboard can show which state feeds are broken right now.
+model IntegrationLog {
+  id             String            @id @default(cuid())
+  system         IntegrationSystem
+  /// State LGD code where the call was state-specific (cadastral), else null.
+  stateCode      String?
+  endpoint       String
+  method         String            @default("GET")
+  requestJson    Json?
+  responseJson   Json?
+  statusCode     Int?
+  latencyMs      Int?
+  success        Boolean           @default(false)
+  errorMessage   String?
+  retryCount     Int               @default(0)
+  /// LIVE | CACHED | SIMULATED — surfaced in the UI so we never imply that mocked data is live.
+  resolvedSource String            @default("SIMULATED")
+  createdAt      DateTime          @default(now())
+
+  @@index([system, createdAt])
+  @@index([stateCode])
+  @@index([success])
+}
+
+model MLPrediction {
+  id           String      @id @default(cuid())
+  /// DELAY_RISK | COMPENSATION_ESTIMATE | ANOMALY | LITIGATION_RISK
+  modelType    String
+  modelVersion String
+  projectId    String?
+  project      Project?    @relation(fields: [projectId], references: [id])
+  proposalId   String?
+  proposal     Proposal?   @relation(fields: [proposalId], references: [id])
+  parcelId     String?
+  parcel       LandParcel? @relation(fields: [parcelId], references: [id])
+
+  score          Decimal  @db.Decimal(8, 5)
+  predictedValue Decimal? @db.Decimal(16, 2)
+  /// SHAP factors, as [{feature, contribution, humanLabel}].
+  explanation    Json?
+  scoredAt       DateTime @default(now())
+
+  @@index([modelType])
+  @@index([proposalId])
+  @@index([projectId])
+}
+
+/// One numbered point on a parcel boundary — "point 1, 2, 3…" as on a survey sketch.
+model ParcelVertex {
+  id              String     @id @default(cuid())
+  parcelId        String
+  parcel          LandParcel @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  seq             Int
+  lat             Decimal    @db.Decimal(10, 7)
+  lng             Decimal    @db.Decimal(10, 7)
+  elevationM      Decimal?   @db.Decimal(8, 2)
+  elevationSource String?
+
+  @@unique([parcelId, seq])
+}
