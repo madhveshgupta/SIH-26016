@@ -1,0 +1,591 @@
+@import "tailwindcss";
+
+/* Dark mode is OPT-IN. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Font stack notes — this matters more than it looks. */
+:root {
+  /* Surfaces — warm paper rather than cool grey */
+  --background: #f6f5ef;
+  --foreground: #14261d;
+  --surface: #ffffff;
+  --surface-muted: #eef0e9;
+  --border: #e0e0d4;
+  --muted: #5f6b62;
+
+  /* Brand — forest green with a terracotta accent */
+  --brand: #1b4d36;
+  --brand-strong: #123425;
+  --brand-soft: #e4ede8;
+  --accent: #b3592b;
+  --accent-soft: #f8ece4;
+
+  /* Semantic */
+  --success: #15803d;
+  --success-soft: #e7f6ec;
+  --warning: #b45309;
+  --warning-soft: #fdf1dc;
+  --danger: #b91c1c;
+  --danger-soft: #fdecec;
+  --info: #0369a1;
+  --info-soft: #e3f2fb;
+
+  /* Chart series. Validated for colour-vision deficiency separation against this surface (scripts in the dataviz skill): worst adjacent pair ΔE 41 protan / 49 normal. */
+  --chart-1: #2f6fd0;
+  --chart-2: #e08c1a;
+  /* Sequential ramp for the national map: one hue, light to dark. */
+  --choropleth-0: #eef3fc;
+  --choropleth-1: #c6d8f3;
+  --choropleth-2: #93b4e4;
+  --choropleth-3: #5e8ad2;
+  --choropleth-4: #2f6fd0;
+  --choropleth-5: #1c4a9c;
+  --choropleth-none: #e6e6e3;
+  /* Corridor readiness — a status scale, not series: ready / paid, awaiting possession / in process / blocked. */
+  --corridor-ready: #17703d;
+  --corridor-paid: #e8a317;
+  --corridor-process: #c9cdc2;
+  --corridor-blocked: #ef5a4c;
+
+  /* Indian scripts. The self-hosted Noto faces (imported in app/layout.tsx) come before the system ones so every script renders the same on every device. */
+  --font-indic:
+    "Noto Sans Devanagari Variable", "Noto Sans Bengali Variable",
+    "Noto Sans Tamil Variable", "Noto Sans Telugu Variable", "Nirmala UI";
+  --font-sans:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, var(--font-indic),
+    "Noto Sans", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* Display serif for the wordmark and hero headline. */
+  --font-display:
+    "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", var(--font-indic), serif;
+}
+
+.dark {
+  --background: #0d1613;
+  --foreground: #e6ece8;
+  --surface: #14201b;
+  --surface-muted: #1a2922;
+  --border: #2a3d33;
+  --muted: #95a69b;
+  --brand: #6fbf95;
+  --brand-strong: #9ad6b6;
+  --brand-soft: #1b3428;
+  --accent: #e08a5a;
+  --accent-soft: #3a2115;
+  --success: #4ade80;
+  --success-soft: #0f2e1b;
+  --warning: #fbbf24;
+  --warning-soft: #33250a;
+  --danger: #f87171;
+  --danger-soft: #3a1414;
+  --info: #7dd3fc;
+  --info-soft: #0c2a3d;
+
+  /* Dark mode is selected, not flipped: its own steps, validated separately. */
+  --chart-1: #5b8ae6;
+  --chart-2: #bd852b;
+  --choropleth-0: #1e2433;
+  --choropleth-1: #24365c;
+  --choropleth-2: #2f4d84;
+  --choropleth-3: #3a66ab;
+  --choropleth-4: #4a7fcd;
+  --choropleth-5: #5b8ae6;
+  --choropleth-none: #2a2a28;
+  --corridor-ready: #429c5a;
+  --corridor-paid: #b07a00;
+  --corridor-process: #3d4a43;
+  --corridor-blocked: #bd3931;
+
+  /* Solid fills — see the note below the theme block. */
+  --brand-fill: #2f7a55;
+  --brand-fill-hover: #25664a;
+  --brand-deep: #1c4a35;
+  --danger-fill: #c0392b;
+  --success-fill: #15803d;
+}
+
+/* Solid fills in dark mode. */
+.dark .bg-brand,
+.dark .hover\:bg-brand:hover,
+.dark .group:hover .group-hover\:bg-brand {
+  background-color: var(--brand-fill);
+}
+.dark .hover\:bg-brand-strong:hover {
+  background-color: var(--brand-fill-hover);
+}
+.dark .bg-brand-strong {
+  background-color: var(--brand-deep);
+}
+.dark .bg-danger {
+  background-color: var(--danger-fill);
+}
+.dark .bg-success {
+  background-color: var(--success-fill);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+/* Existing screens were written against Tailwind's neutral palette with `dark:` variants. */
+.bg-white {
+  background-color: var(--surface);
+}
+
+/* Visible keyboard focus everywhere — WCAG 2.4.7. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* The tricolour hairline used under the top bar. */
+.tricolour {
+  background: linear-gradient(90deg, #ff9933 0 33.33%, #ffffff 33.33% 66.66%, #138808 66.66% 100%);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fade-in 180ms ease-out both;
+}
+
+/* ──────────────────────────────────────────────────────────────────────── Card motion. */
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: card-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 26%;
+    }
+
+    /* A left-to-right cascade across each row of three: later columns finish their entrance a little further up the scroll, so the row resolves as a sweep rather than three things appearing at once. */
+    .reveal-grid > :nth-child(3n + 2) .reveal,
+    .reveal-grid > :nth-child(3n + 2).reveal {
+      animation-range: entry 4% cover 31%;
+    }
+    .reveal-grid > :nth-child(3n + 3) .reveal,
+    .reveal-grid > :nth-child(3n + 3).reveal {
+      animation-range: entry 4% cover 36%;
+    }
+  }
+}
+
+/* Hover / focus. */
+.card-lift {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 240ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 240ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    border-color 240ms ease;
+}
+
+/* the hairline that draws across the top edge */
+.card-lift::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card-lift:hover,
+.card-lift:focus-within {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--brand) 35%, var(--border));
+  box-shadow: 0 14px 34px -12px color-mix(in srgb, var(--brand) 42%, transparent);
+}
+
+.card-lift:hover::after,
+.card-lift:focus-within::after {
+  transform: scaleX(1);
+}
+
+/* the icon well fills with brand colour as the card lifts */
+.card-lift .card-icon {
+  transition:
+    background-color 240ms ease,
+    color 240ms ease,
+    transform 240ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card-lift:hover .card-icon,
+.card-lift:focus-within .card-icon {
+  background-color: var(--brand);
+  color: #fff;
+  transform: scale(1.06) rotate(-3deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift,
+  .card-lift::after,
+  .card-lift .card-icon {
+    transition: none;
+  }
+  .card-lift:hover,
+  .card-lift:focus-within {
+    transform: none;
+  }
+}
+
+/* Bare glyph (no background well) — used by the four hero pillars, where the reference design sets the icon directly on the card. */
+.card-lift .card-glyph {
+  transition:
+    color 240ms ease,
+    transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.card-lift:hover .card-glyph,
+.card-lift:focus-within .card-glyph {
+  color: var(--accent);
+  transform: scale(1.08) translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift .card-glyph {
+    transition: none;
+  }
+  .card-lift:hover .card-glyph,
+  .card-lift:focus-within .card-glyph {
+    transform: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────── Hero choreography. */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes draw-line {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes fade-up-soft {
+  from { opacity: 0; transform: translateY(10px) scale(0.99); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes pin-pop {
+  0%   { opacity: 0; transform: scale(0.2); }
+  70%  { opacity: 1; transform: scale(1.14); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.75); opacity: 0.55; }
+  70%  { transform: scale(2.1);  opacity: 0; }
+  100% { transform: scale(2.1);  opacity: 0; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -14px, 0); }
+}
+
+/* the map itself, arriving as one dramatic entrance */
+@keyframes map-pop {
+  0%   { opacity: 0; transform: translateY(52px) scale(0.7) rotateX(12deg); }
+  55%  { opacity: 1; transform: translateY(-8px) scale(1.045) rotateX(-3deg); }
+  78%  { transform: translateY(2px) scale(0.99) rotateX(1deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
+}
+
+/* a slow, continuous breathing float once the map has landed */
+@keyframes map-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* a shockwave behind the map, timed to its landing */
+@keyframes burst-ring {
+  0%   { transform: scale(0.35); opacity: 0.55; }
+  60%  { opacity: 0.18; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* light sweeping once across the terrain, inside the country's own outline */
+@keyframes map-sweep {
+  0%   { opacity: 0; transform: translateX(-260px) skewX(-12deg); }
+  14%  { opacity: 0.6; }
+  55%  { opacity: 0.28; }
+  100% { opacity: 0; transform: translateX(560px) skewX(-12deg); }
+}
+
+.map-stage {
+  perspective: 1500px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* text, staggered by depth down the column */
+  .hero-step {
+    animation: rise-in 720ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .hero-step-1 { animation-delay: 60ms; }
+  .hero-step-2 { animation-delay: 170ms; }
+  .hero-step-3 { animation-delay: 280ms; }
+  .hero-step-4 { animation-delay: 390ms; }
+  .hero-step-5 { animation-delay: 500ms; }
+
+  /* the coastline surveys itself */
+  .map-draw {
+    stroke-dasharray: 1;
+    animation: draw-line 2600ms cubic-bezier(0.55, 0.1, 0.25, 1) 220ms both;
+  }
+  /* land and districts arrive behind it */
+  .map-land     { animation: fade-up-soft 1100ms ease-out 700ms both; }
+  .map-district { animation: fade-up-soft 900ms ease-out 1500ms both; }
+
+  /* then the places we actually hold records for */
+  .map-pin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pin-pop 620ms cubic-bezier(0.34, 1.4, 0.5, 1) both;
+  }
+  .map-pin-1 { animation-delay: 1900ms; }
+  .map-pin-2 { animation-delay: 2030ms; }
+  .map-pin-3 { animation-delay: 2160ms; }
+  .map-pin-4 { animation-delay: 2290ms; }
+  .map-pin-5 { animation-delay: 2420ms; }
+
+  .map-ping {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse-ring 3s cubic-bezier(0.2, 0.6, 0.3, 1) 2700ms infinite;
+  }
+
+  /* the soft colour fields behind everything, barely moving */
+  .orb-drift   { animation: drift 15s ease-in-out infinite; }
+  .orb-drift-2 { animation: drift 19s ease-in-out 2s infinite; }
+
+  /* The map pops up off the page toward the viewer, a shockwave marking where it lands, then settles into a slow continuous float. rotateX needs `perspective` on an ancestor to read as depth rather than a vertical squash — see .map-stage. */
+  .map-pop-in {
+    transform-origin: 50% 78%;
+    animation: map-pop 980ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .map-float-wrap {
+    animation: map-float 6s ease-in-out 1020ms infinite;
+  }
+  .map-burst {
+    animation: burst-ring 1300ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+  }
+  /* a single pass of light across the terrain, clipped to India's own outline in the SVG so it can never spill past the coastline */
+  .map-sweep {
+    animation: map-sweep 1500ms ease-out 960ms both;
+  }
+}
+
+/* With reduced motion the map is simply present and correct — no pop, no float, no sweep, nothing left stalled at its 0% (invisible) keyframe. */
+@media (prefers-reduced-motion: reduce) {
+  .map-draw { stroke-dasharray: none; }
+  .map-pop-in, .map-float-wrap, .map-burst, .map-sweep {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────── Flip cards. */
+
+.flip-scene {
+  perspective: 1600px;
+}
+
+.flip-card {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  outline: none;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform 640ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flip-card:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
+
+.flip-card.is-flipped {
+  transform: rotateY(180deg) scale(1.035) translateY(-2px);
+}
+
+.flip-face {
+  grid-row: 1;
+  grid-column: 1;
+  position: relative;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-face-back {
+  transform: rotateY(180deg);
+}
+
+/* a quiet hint that the card is clickable, not part of its content */
+.flip-hint {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.flip-scene:hover .flip-hint,
+.flip-card:focus-visible .flip-hint {
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card {
+    transition: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────── Login page entrance. */
+@media (prefers-reduced-motion: no-preference) {
+  .role-card {
+    animation: rise-in 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+/* Hero pillars (RevealWhenWhole): hidden until the whole card is on screen, so the fold never cuts one in half. */
+.whole-reveal { opacity: 0; }
+.whole-reveal.is-shown { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .whole-reveal.is-shown {
+    animation: rise-in 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+/* Field survey map */
+.field-map .leaflet-tooltip.field-plot-label {
+  padding: 2px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--foreground);
+  font: 600 12px/1.5 var(--font-sans);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+/* Khasra labels on every plot at close zoom: text on the imagery, no boxes. */
+.field-map .leaflet-tooltip.field-parcel-label {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  font: 600 11px/1 var(--font-sans);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.9), 0 0 1px #000;
+}
+.field-map .leaflet-tooltip.field-parcel-label::before {
+  display: none;
+}
+.field-cluster {
+  display: flex;
+  height: 30px;
+  width: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid #fff;
+  background: rgba(27, 77, 54, 0.92);
+  color: #fff;
+  font: 600 11px/1 var(--font-sans);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.field-cluster.has-issue {
+  box-shadow: 0 0 0 2px #f05252, 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.field-map .field-popup .leaflet-popup-content-wrapper {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(20, 38, 29, 0.18);
+}
+.field-map .field-popup .leaflet-popup-content {
+  margin: 12px 14px;
+}
+.field-map .field-popup .leaflet-popup-tip {
+  background: var(--surface);
+}
+.field-map .field-popup a.leaflet-popup-close-button {
+  top: 6px;
+  right: 6px;
+  color: var(--muted);
+}
+.field-map .leaflet-control-scale-line {
+  border-color: #fff;
+  background: rgba(20, 38, 29, 0.55);
+  color: #fff;
+  font: 500 10px/1.4 var(--font-sans);
+  text-shadow: none;
+}/* One pulse on the newly selected plot, so a selection is visible even when the map barely moves. */
+@keyframes field-selected-flash {
+  0% { stroke-width: 10px; stroke-opacity: 0.3; }
+  100% { stroke-opacity: 1; }
+}
+.field-map path.field-selected-flash {
+  animation: field-selected-flash 0.9s ease-out 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .field-map path.field-selected-flash { animation: none; }
+}
