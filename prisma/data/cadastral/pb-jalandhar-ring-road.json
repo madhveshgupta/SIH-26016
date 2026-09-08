@@ -1,0 +1,1897 @@
+{
+ "corridorId": "pb-jalandhar-ring-road",
+ "projectRef": "PRJ/MORTH/2026/0009",
+ "label": "Jalandhar Ring Road, Package 2 — 090 ਢਿਲਵਾਂ, 30352 ਮੁਜਫਰ ਪੁਰ",
+ "source": "https://gisbhunaksha.punjab.gov.in",
+ "srid": 32643,
+ "gisCode": "0100101009030352",
+ "portal": {
+  "kind": "classic",
+  "apiBase": "https://gisbhunaksha.punjab.gov.in",
+  "wmsUrl": "https://gisbhunaksha.punjab.gov.in/WMS",
+  "referer": "https://gisbhunaksha.punjab.gov.in/",
+  "wmsVersion": "1.1.1",
+  "stateCode": "03",
+  "levels": "01,001,010,090,30352,",
+  "gisCode": "0100101009030352",
+  "srid": 32643,
+  "wmsCrs": "epsg",
+  "insetPx": 0
+ },
+ "adminPath": [
+  {
+   "code": "01",
+   "name": "01 ਜਲੰਧਰ"
+  },
+  {
+   "code": "001",
+   "name": "001 ਜਲੰਧਰ-1"
+  },
+  {
+   "code": "010",
+   "name": "010 ਪਤਾਰਾ"
+  },
+  {
+   "code": "090",
+   "name": "090 ਢਿਲਵਾਂ"
+  },
+  {
+   "code": "30352",
+   "name": "30352 ਮੁਜਫਰ ਪੁਰ"
+  }
+ ],
+ "method": "Plot-at-XY lookups along the centreline; each plot's boundary traced from the portal's PLOT_LIST/PLOT_SELECTION rendering of that single plot and verified against the portal's reported extent.",
+ "harvestedAt": "2026-09-17T10:13:06.552Z",
+ "centreline": [
+  [
+   562674.8648999999,
+   3466161.32016
+  ],
+  [
+   562675.8648999999,
+   3466537.3974
+  ],
+  [
+   562674.8648999999,
+   3466913.47464
+  ]
+ ],
+ "rightOfWayM": 45,
+ "lookups": 99,
+ "rejected": [],
+ "plots": [
+  {
+   "khasraNo": "13//18",
+   "plotId": "Y93fibMYTxKiPmdj73RBSA",
+   "pniu": "89A8DCD8KJB6H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466158.5309999995,
+    "maxX": 562763.7141000004,
+    "maxY": 3466218.8814000003
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466188.781
+    ],
+    [
+     562730.158,
+     3466158.531
+    ],
+    [
+     562763.658,
+     3466188.781
+    ],
+    [
+     562730.158,
+     3466219.031
+    ],
+    [
+     562696.658,
+     3466188.781
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 0
+  },
+  {
+   "khasraNo": "13//19",
+   "plotId": "5Ayvry0tRNaIJz3dyhcWhQ",
+   "pniu": "89A8DGD8KYJYH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466158.5309999995,
+    "maxX": 562691.6288999999,
+    "maxY": 3466218.8814000003
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466188.781
+    ],
+    [
+     562660.602,
+     3466158.531
+    ],
+    [
+     562691.602,
+     3466188.781
+    ],
+    [
+     562660.602,
+     3466219.031
+    ],
+    [
+     562629.602,
+     3466188.781
+    ]
+   ],
+   "tracedAreaSqm": 1876,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 0
+  },
+  {
+   "khasraNo": "13//13",
+   "plotId": "aX-WclAGSemv2jylmAZgJw",
+   "pniu": "89A8UDD8KJB9H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466218.8814000003,
+    "maxX": 562763.7141000004,
+    "maxY": 3466279.2317999993
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466249.131
+    ],
+    [
+     562730.158,
+     3466218.881
+    ],
+    [
+     562763.658,
+     3466249.131
+    ],
+    [
+     562730.158,
+     3466279.381
+    ],
+    [
+     562696.658,
+     3466249.131
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 60
+  },
+  {
+   "khasraNo": "13//12",
+   "plotId": "vvZZKWBHTdet5dHbU_WReQ",
+   "pniu": "89A8UHD8KYJMH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466218.8814000003,
+    "maxX": 562691.6288999999,
+    "maxY": 3466279.2317999993
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466249.131
+    ],
+    [
+     562660.602,
+     3466218.881
+    ],
+    [
+     562691.602,
+     3466249.131
+    ],
+    [
+     562660.602,
+     3466279.381
+    ],
+    [
+     562629.602,
+     3466249.131
+    ]
+   ],
+   "tracedAreaSqm": 1876,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 60
+  },
+  {
+   "khasraNo": "106",
+   "plotId": "9hj-tN8cT0Ouh9j3_pQqXA",
+   "pniu": "89A9YQD8KG6KH0",
+   "reportedExtent": {
+    "minX": 562428.4341000002,
+    "minY": 3466279.2317999993,
+    "maxX": 563087.2593,
+    "maxY": 3466354.6698000003
+   },
+   "ringUtm": [
+    [
+     562428.434,
+     3466317.004
+    ],
+    [
+     562757.847,
+     3466279.232
+    ],
+    [
+     563087.259,
+     3466281.867
+    ],
+    [
+     562759.384,
+     3466284.502
+    ],
+    [
+     562431.509,
+     3466319.64
+    ],
+    [
+     562429.971,
+     3466354.777
+    ],
+    [
+     562428.434,
+     3466317.004
+    ]
+   ],
+   "tracedAreaSqm": 2305,
+   "recordedAreaSqm": null,
+   "vertices": 6,
+   "metresPerPixel": 0.43921679999989766,
+   "extentErrorM": 0.107,
+   "chainageM": 120
+  },
+  {
+   "khasraNo": "13//8/2",
+   "plotId": "6_BrFCN7SEavU-sk2xaMEw",
+   "pniu": "89A9GTD8KJ5TH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466284.261,
+    "maxX": 562730.1860999996,
+    "maxY": 3466339.5822
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466312.011
+    ],
+    [
+     562713.408,
+     3466284.261
+    ],
+    [
+     562730.158,
+     3466312.011
+    ],
+    [
+     562713.408,
+     3466339.761
+    ],
+    [
+     562696.658,
+     3466312.011
+    ]
+   ],
+   "tracedAreaSqm": 930,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.179,
+   "chainageM": 135
+  },
+  {
+   "khasraNo": "35",
+   "plotId": "JRawNlf7QR2qocErx2PsUg",
+   "pniu": "89AAFVD8KYM0H0",
+   "reportedExtent": {
+    "minX": 562562.5460999999,
+    "minY": 3466284.261,
+    "maxX": 562684.9232999999,
+    "maxY": 3466554.1613999996
+   },
+   "ringUtm": [
+    [
+     562562.556,
+     3466551.771
+    ],
+    [
+     562605.431,
+     3466549.271
+    ],
+    [
+     562648.306,
+     3466548.521
+    ],
+    [
+     562649.681,
+     3466520.271
+    ],
+    [
+     562666.431,
+     3466399.521
+    ],
+    [
+     562672.931,
+     3466341.021
+    ],
+    [
+     562676.681,
+     3466315.521
+    ],
+    [
+     562679.681,
+     3466286.021
+    ],
+    [
+     562679.806,
+     3466285.146
+    ],
+    [
+     562682.306,
+     3466284.271
+    ],
+    [
+     562684.806,
+     3466285.021
+    ],
+    [
+     562678.181,
+     3466339.021
+    ],
+    [
+     562668.181,
+     3466429.771
+    ],
+    [
+     562663.181,
+     3466459.771
+    ],
+    [
+     562654.931,
+     3466520.271
+    ],
+    [
+     562653.056,
+     3466553.646
+    ],
+    [
+     562607.806,
+     3466554.271
+    ],
+    [
+     562562.556,
+     3466551.771
+    ]
+   ],
+   "tracedAreaSqm": 1701,
+   "recordedAreaSqm": null,
+   "vertices": 17,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.117,
+   "chainageM": 135
+  },
+  {
+   "khasraNo": "13//9/3",
+   "plotId": "BSkTCH2oRtWfI4W1O4AT8Q",
+   "pniu": "89A9DMD8KYHJH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466284.261,
+    "maxX": 562679.8941000002,
+    "maxY": 3466316.1126000006
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466300.261
+    ],
+    [
+     562654.727,
+     3466284.261
+    ],
+    [
+     562679.852,
+     3466285.136
+    ],
+    [
+     562676.602,
+     3466315.886
+    ],
+    [
+     562653.102,
+     3466316.261
+    ],
+    [
+     562629.602,
+     3466300.261
+    ]
+   ],
+   "tracedAreaSqm": 1152,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.148,
+   "chainageM": 135
+  },
+  {
+   "khasraNo": "13//9/1",
+   "plotId": "i3lOyOl0RmS-QcYfGJvGtA",
+   "pniu": "89A9GUD8KYT6H0",
+   "reportedExtent": {
+    "minX": 562678.2176999999,
+    "minY": 3466284.261,
+    "maxX": 562696.6580999997,
+    "maxY": 3466339.5822
+   },
+   "ringUtm": [
+    [
+     562678.218,
+     3466339.511
+    ],
+    [
+     562684.968,
+     3466285.011
+    ],
+    [
+     562690.843,
+     3466284.261
+    ],
+    [
+     562696.718,
+     3466312.011
+    ],
+    [
+     562687.468,
+     3466339.761
+    ],
+    [
+     562678.218,
+     3466339.511
+    ]
+   ],
+   "tracedAreaSqm": 625,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.179,
+   "chainageM": 150
+  },
+  {
+   "khasraNo": "13//9/2",
+   "plotId": "O1AXucmxQhqReiRBOZzaSg",
+   "pniu": "89A9LGD8KYH3H0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466316.1126000006,
+    "maxX": 562676.5412999997,
+    "maxY": 3466339.5822
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466327.863
+    ],
+    [
+     562653.102,
+     3466316.113
+    ],
+    [
+     562676.602,
+     3466316.738
+    ],
+    [
+     562673.102,
+     3466339.363
+    ],
+    [
+     562651.352,
+     3466339.613
+    ],
+    [
+     562629.602,
+     3466327.863
+    ]
+   ],
+   "tracedAreaSqm": 788,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.061,
+   "chainageM": 165
+  },
+  {
+   "khasraNo": "13//3/1",
+   "plotId": "ovWHVawZTrGleHdJJpQzkQ",
+   "pniu": "89AA1VD8KJ61H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466339.5822,
+    "maxX": 562730.1860999996,
+    "maxY": 3466399.932600001
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466369.832
+    ],
+    [
+     562713.408,
+     3466339.582
+    ],
+    [
+     562730.158,
+     3466369.832
+    ],
+    [
+     562713.408,
+     3466400.082
+    ],
+    [
+     562696.658,
+     3466369.832
+    ]
+   ],
+   "tracedAreaSqm": 1013,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 180
+  },
+  {
+   "khasraNo": "13//2/2",
+   "plotId": "ZJfmE7gRTR-MVYjOYZn2og",
+   "pniu": "89AA20D8KYS6H0",
+   "reportedExtent": {
+    "minX": 562671.5120999999,
+    "minY": 3466339.5822,
+    "maxX": 562696.6580999997,
+    "maxY": 3466399.932600001
+   },
+   "ringUtm": [
+    [
+     562671.512,
+     3466399.832
+    ],
+    [
+     562678.262,
+     3466340.332
+    ],
+    [
+     562687.387,
+     3466339.582
+    ],
+    [
+     562696.512,
+     3466369.832
+    ],
+    [
+     562684.012,
+     3466400.082
+    ],
+    [
+     562671.512,
+     3466399.832
+    ]
+   ],
+   "tracedAreaSqm": 975,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 180
+  },
+  {
+   "khasraNo": "13//2/1",
+   "plotId": "lX42HXDrQZymOadcOzXSnQ",
+   "pniu": "89AA22D8KYGBH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466339.5822,
+    "maxX": 562673.1885000002,
+    "maxY": 3466399.932600001
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466369.832
+    ],
+    [
+     562651.352,
+     3466339.582
+    ],
+    [
+     562673.102,
+     3466340.332
+    ],
+    [
+     562666.352,
+     3466399.832
+    ],
+    [
+     562647.977,
+     3466400.082
+    ],
+    [
+     562629.602,
+     3466369.832
+    ]
+   ],
+   "tracedAreaSqm": 1812,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 180
+  },
+  {
+   "khasraNo": "10//23",
+   "plotId": "EFS1FvXFR0KQrukpAROkng",
+   "pniu": "89AAYUD8KJBLH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466399.932600001,
+    "maxX": 562763.7141000004,
+    "maxY": 3466460.283
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466430.183
+    ],
+    [
+     562730.158,
+     3466399.933
+    ],
+    [
+     562763.658,
+     3466430.183
+    ],
+    [
+     562730.158,
+     3466460.433
+    ],
+    [
+     562696.658,
+     3466430.183
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 240
+  },
+  {
+   "khasraNo": "10//22/3",
+   "plotId": "4mcvfq03TCW2q4FwBNPBjA",
+   "pniu": "89AAEPD8KYREH0",
+   "reportedExtent": {
+    "minX": 562668.1593000004,
+    "minY": 3466399.932600001,
+    "maxX": 562696.6580999997,
+    "maxY": 3466430.1077999994
+   },
+   "ringUtm": [
+    [
+     562668.159,
+     3466429.808
+    ],
+    [
+     562671.409,
+     3466400.808
+    ],
+    [
+     562684.034,
+     3466399.933
+    ],
+    [
+     562696.659,
+     3466415.058
+    ],
+    [
+     562682.409,
+     3466430.183
+    ],
+    [
+     562668.159,
+     3466429.808
+    ]
+   ],
+   "tracedAreaSqm": 601,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.075,
+   "chainageM": 240
+  },
+  {
+   "khasraNo": "10//22/1",
+   "plotId": "Cc3dk_f9SM2ygz4iRP7bfg",
+   "pniu": "89AAJ3D8KYF7H0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466399.932600001,
+    "maxX": 562666.4829000002,
+    "maxY": 3466460.283
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466430.183
+    ],
+    [
+     562647.977,
+     3466399.933
+    ],
+    [
+     562666.352,
+     3466400.558
+    ],
+    [
+     562658.102,
+     3466460.183
+    ],
+    [
+     562643.852,
+     3466460.433
+    ],
+    [
+     562629.602,
+     3466430.183
+    ]
+   ],
+   "tracedAreaSqm": 1474,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 240
+  },
+  {
+   "khasraNo": "10//22/2",
+   "plotId": "zi6rFA4EQNyFT6izIjvV7A",
+   "pniu": "89AAN9D8KYQQH0",
+   "reportedExtent": {
+    "minX": 562663.1300999997,
+    "minY": 3466430.1077999994,
+    "maxX": 562696.6580999997,
+    "maxY": 3466460.283
+   },
+   "ringUtm": [
+    [
+     562663.13,
+     3466460.108
+    ],
+    [
+     562668.13,
+     3466430.608
+    ],
+    [
+     562682.38,
+     3466430.108
+    ],
+    [
+     562696.63,
+     3466445.233
+    ],
+    [
+     562679.88,
+     3466460.358
+    ],
+    [
+     562663.13,
+     3466460.108
+    ]
+   ],
+   "tracedAreaSqm": 697,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.075,
+   "chainageM": 270
+  },
+  {
+   "khasraNo": "10//18",
+   "plotId": "eFXwJJuzSTuhRvSiDAs5aA",
+   "pniu": "89AB4ND8KJBZH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466460.283,
+    "maxX": 562763.7141000004,
+    "maxY": 3466520.6334000006
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466490.533
+    ],
+    [
+     562730.158,
+     3466460.283
+    ],
+    [
+     562763.658,
+     3466490.533
+    ],
+    [
+     562730.158,
+     3466520.783
+    ],
+    [
+     562696.658,
+     3466490.533
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 300
+  },
+  {
+   "khasraNo": "10//19/1",
+   "plotId": "WI_gcllUQiWE-1gCFG1zgA",
+   "pniu": "89AB4QD8KYPQH0",
+   "reportedExtent": {
+    "minX": 562654.7481000004,
+    "minY": 3466460.283,
+    "maxX": 562696.6580999997,
+    "maxY": 3466520.6334000006
+   },
+   "ringUtm": [
+    [
+     562654.748,
+     3466520.533
+    ],
+    [
+     562662.998,
+     3466460.908
+    ],
+    [
+     562679.748,
+     3466460.283
+    ],
+    [
+     562696.498,
+     3466490.533
+    ],
+    [
+     562675.623,
+     3466520.783
+    ],
+    [
+     562654.748,
+     3466520.533
+    ]
+   ],
+   "tracedAreaSqm": 1698,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.16,
+   "chainageM": 300
+  },
+  {
+   "khasraNo": "10//19/2",
+   "plotId": "L_1L7L5rQrKKODekkM5TQg",
+   "pniu": "89AB4SD8KYDVH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466460.283,
+    "maxX": 562658.1009,
+    "maxY": 3466520.6334000006
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466490.533
+    ],
+    [
+     562643.852,
+     3466460.283
+    ],
+    [
+     562658.102,
+     3466460.908
+    ],
+    [
+     562649.602,
+     3466520.533
+    ],
+    [
+     562639.602,
+     3466520.783
+    ],
+    [
+     562629.602,
+     3466490.533
+    ]
+   ],
+   "tracedAreaSqm": 1096,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 300
+  },
+  {
+   "khasraNo": "10//13/2",
+   "plotId": "GmmEmISTTTGzeMEVbFGnjg",
+   "pniu": "89ABY0D8KJ45H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466520.6334000006,
+    "maxX": 562763.7141000004,
+    "maxY": 3466554.1613999996
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466537.383
+    ],
+    [
+     562706.658,
+     3466520.633
+    ],
+    [
+     562716.658,
+     3466531.508
+    ],
+    [
+     562735.158,
+     3466542.383
+    ],
+    [
+     562753.658,
+     3466531.508
+    ],
+    [
+     562758.658,
+     3466520.633
+    ],
+    [
+     562763.658,
+     3466537.383
+    ],
+    [
+     562730.158,
+     3466554.133
+    ],
+    [
+     562696.658,
+     3466537.383
+    ]
+   ],
+   "tracedAreaSqm": 873,
+   "recordedAreaSqm": null,
+   "vertices": 8,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.056,
+   "chainageM": 360
+  },
+  {
+   "khasraNo": "10//12/3",
+   "plotId": "WZnJDe3QQiOAgcVK0_yw2Q",
+   "pniu": "89ABY1D8KYP2H0",
+   "reportedExtent": {
+    "minX": 562653.0717000002,
+    "minY": 3466520.6334000006,
+    "maxX": 562696.6580999997,
+    "maxY": 3466554.1613999996
+   },
+   "ringUtm": [
+    [
+     562653.072,
+     3466553.383
+    ],
+    [
+     562654.572,
+     3466522.633
+    ],
+    [
+     562675.572,
+     3466520.633
+    ],
+    [
+     562696.572,
+     3466537.383
+    ],
+    [
+     562674.822,
+     3466554.133
+    ],
+    [
+     562653.072,
+     3466553.383
+    ]
+   ],
+   "tracedAreaSqm": 1044,
+   "recordedAreaSqm": null,
+   "vertices": 5,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.086,
+   "chainageM": 360
+  },
+  {
+   "khasraNo": "10//13/1",
+   "plotId": "56HFcihOQR-tKKLOzojnAg",
+   "pniu": "89ABQFD8KJBTH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466554.1613999996,
+    "maxX": 562763.7141000004,
+    "maxY": 3466580.9837999996
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466567.661
+    ],
+    [
+     562730.158,
+     3466554.161
+    ],
+    [
+     562763.658,
+     3466567.661
+    ],
+    [
+     562730.158,
+     3466581.161
+    ],
+    [
+     562696.658,
+     3466567.661
+    ]
+   ],
+   "tracedAreaSqm": 904,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.178,
+   "chainageM": 406
+  },
+  {
+   "khasraNo": "10//12/2",
+   "plotId": "FGSaC9xET36Y3XPzjtmyXQ",
+   "pniu": "89ABQYD8KYL5H0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466554.1613999996,
+    "maxX": 562696.6580999997,
+    "maxY": 3466580.9837999996
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466567.661
+    ],
+    [
+     562663.102,
+     3466554.161
+    ],
+    [
+     562696.602,
+     3466567.661
+    ],
+    [
+     562663.102,
+     3466581.161
+    ],
+    [
+     562629.602,
+     3466567.661
+    ]
+   ],
+   "tracedAreaSqm": 905,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.178,
+   "chainageM": 406
+  },
+  {
+   "khasraNo": "10//8",
+   "plotId": "hs2hYcckTl2eFDYD87j6Gg",
+   "pniu": "89AC7GD8KJC0H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466580.9837999996,
+    "maxX": 562763.7141000004,
+    "maxY": 3466641.3342000004
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466611.234
+    ],
+    [
+     562730.158,
+     3466580.984
+    ],
+    [
+     562763.658,
+     3466611.234
+    ],
+    [
+     562760.283,
+     3466641.484
+    ],
+    [
+     562756.908,
+     3466633.109
+    ],
+    [
+     562750.283,
+     3466624.734
+    ],
+    [
+     562743.658,
+     3466633.109
+    ],
+    [
+     562720.158,
+     3466641.484
+    ],
+    [
+     562696.658,
+     3466611.234
+    ]
+   ],
+   "tracedAreaSqm": 2355,
+   "recordedAreaSqm": null,
+   "vertices": 8,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 421
+  },
+  {
+   "khasraNo": "10//9",
+   "plotId": "1cOGiVt8QOWTSj6-z82nZg",
+   "pniu": "89AC7JD8KYL7H0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466580.9837999996,
+    "maxX": 562696.6580999997,
+    "maxY": 3466641.3342000004
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466611.234
+    ],
+    [
+     562663.102,
+     3466580.984
+    ],
+    [
+     562696.602,
+     3466611.234
+    ],
+    [
+     562663.102,
+     3466641.484
+    ],
+    [
+     562629.602,
+     3466611.234
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 421
+  },
+  {
+   "khasraNo": "10//3",
+   "plotId": "bGtC_dTHQtmo0gFLWw0lpw",
+   "pniu": "89ACZGD8KJC4H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466641.3342000004,
+    "maxX": 562763.7141000004,
+    "maxY": 3466701.6845999993
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466671.584
+    ],
+    [
+     562730.158,
+     3466641.334
+    ],
+    [
+     562763.658,
+     3466671.584
+    ],
+    [
+     562730.158,
+     3466701.834
+    ],
+    [
+     562696.658,
+     3466671.584
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 481
+  },
+  {
+   "khasraNo": "10//2/2",
+   "plotId": "el01DqYTSGqz-5zibwPVMQ",
+   "pniu": "89ACJLD8KYLAH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466641.3342000004,
+    "maxX": 562696.6580999997,
+    "maxY": 3466666.4802
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466653.959
+    ],
+    [
+     562663.102,
+     3466641.334
+    ],
+    [
+     562696.602,
+     3466653.959
+    ],
+    [
+     562663.102,
+     3466666.584
+    ],
+    [
+     562629.602,
+     3466653.959
+    ]
+   ],
+   "tracedAreaSqm": 846,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.104,
+   "chainageM": 481
+  },
+  {
+   "khasraNo": "10//2/1",
+   "plotId": "2O2IRHj8Rm-Aqy3J020S2Q",
+   "pniu": "89ACS5D8KYLCH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466666.4802,
+    "maxX": 562696.6580999997,
+    "maxY": 3466701.6845999993
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466684.105
+    ],
+    [
+     562663.102,
+     3466666.48
+    ],
+    [
+     562696.602,
+     3466684.105
+    ],
+    [
+     562663.102,
+     3466701.73
+    ],
+    [
+     562629.602,
+     3466684.105
+    ]
+   ],
+   "tracedAreaSqm": 1181,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.056,
+   "chainageM": 511
+  },
+  {
+   "khasraNo": "34",
+   "plotId": "6yPEPPjxT66bzoZw8SD8bQ",
+   "pniu": "89AD45D8KY03H0",
+   "reportedExtent": {
+    "minX": 562566.7456,
+    "minY": 3466701.6845999993,
+    "maxX": 563015.1741000004,
+    "maxY": 3466717.0658
+   },
+   "ringUtm": [
+    [
+     562566.746,
+     3466716.632
+    ],
+    [
+     562567.344,
+     3466712.148
+    ],
+    [
+     562567.642,
+     3466711.998
+    ],
+    [
+     562628.33,
+     3466701.834
+    ],
+    [
+     562821.752,
+     3466701.685
+    ],
+    [
+     563015.174,
+     3466704.226
+    ],
+    [
+     562821.752,
+     3466706.767
+    ],
+    [
+     562628.33,
+     3466706.916
+    ],
+    [
+     562567.045,
+     3466717.23
+    ],
+    [
+     562566.746,
+     3466716.632
+    ]
+   ],
+   "tracedAreaSqm": 1788,
+   "recordedAreaSqm": null,
+   "vertices": 9,
+   "metresPerPixel": 0.29895233333356575,
+   "extentErrorM": 0.164,
+   "chainageM": 541
+  },
+  {
+   "khasraNo": "6//23",
+   "plotId": "bXmXWf7iRiqBc8GiXb86Tg",
+   "pniu": "89ADAVD8KJC8H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466706.7138,
+    "maxX": 562763.7141000004,
+    "maxY": 3466762.035
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466734.464
+    ],
+    [
+     562730.158,
+     3466706.714
+    ],
+    [
+     562763.658,
+     3466734.464
+    ],
+    [
+     562730.158,
+     3466762.214
+    ],
+    [
+     562696.658,
+     3466734.464
+    ]
+   ],
+   "tracedAreaSqm": 1859,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.179,
+   "chainageM": 556
+  },
+  {
+   "khasraNo": "6//22/5",
+   "plotId": "03dfWoDcQkKGm3NMas83vA",
+   "pniu": "89ADB2D8KYTFH0",
+   "reportedExtent": {
+    "minX": 562681.5705000004,
+    "minY": 3466706.7138,
+    "maxX": 562693.3053000001,
+    "maxY": 3466762.035
+   },
+   "ringUtm": [
+    [
+     562681.571,
+     3466734.464
+    ],
+    [
+     562687.446,
+     3466706.714
+    ],
+    [
+     562693.321,
+     3466734.464
+    ],
+    [
+     562687.446,
+     3466762.214
+    ],
+    [
+     562681.571,
+     3466734.464
+    ]
+   ],
+   "tracedAreaSqm": 326,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.179,
+   "chainageM": 556
+  },
+  {
+   "khasraNo": "6//22/3",
+   "plotId": "CVnlAj41QV-tDv_hi3eUaw",
+   "pniu": "89ADB3D8KYL6H0",
+   "reportedExtent": {
+    "minX": 562649.7188999997,
+    "minY": 3466706.7138,
+    "maxX": 562674.8649000004,
+    "maxY": 3466762.035
+   },
+   "ringUtm": [
+    [
+     562649.719,
+     3466734.464
+    ],
+    [
+     562662.219,
+     3466706.714
+    ],
+    [
+     562674.719,
+     3466734.464
+    ],
+    [
+     562662.219,
+     3466762.214
+    ],
+    [
+     562649.719,
+     3466734.464
+    ]
+   ],
+   "tracedAreaSqm": 694,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.179,
+   "chainageM": 556
+  },
+  {
+   "khasraNo": "6//18/3",
+   "plotId": "t3OkusPUTECBSulYUqmXNw",
+   "pniu": "89ADRAD8KJ6RH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466762.035,
+    "maxX": 562730.1860999996,
+    "maxY": 3466822.385399999
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466792.285
+    ],
+    [
+     562713.408,
+     3466762.035
+    ],
+    [
+     562730.158,
+     3466792.285
+    ],
+    [
+     562713.408,
+     3466822.535
+    ],
+    [
+     562696.658,
+     3466792.285
+    ]
+   ],
+   "tracedAreaSqm": 1013,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 601
+  },
+  {
+   "khasraNo": "6//19/1",
+   "plotId": "Awe6jh6kTa-7ZEfY7nICWg",
+   "pniu": "89ADQTD8KYRCH0",
+   "reportedExtent": {
+    "minX": 562668.1593000004,
+    "minY": 3466762.035,
+    "maxX": 562693.3053000001,
+    "maxY": 3466819.0326000005
+   },
+   "ringUtm": [
+    [
+     562668.159,
+     3466790.535
+    ],
+    [
+     562680.659,
+     3466762.035
+    ],
+    [
+     562693.159,
+     3466790.535
+    ],
+    [
+     562680.659,
+     3466819.035
+    ],
+    [
+     562668.159,
+     3466790.535
+    ]
+   ],
+   "tracedAreaSqm": 713,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.146,
+   "chainageM": 601
+  },
+  {
+   "khasraNo": "6//19/2",
+   "plotId": "jhkDHio2RPOtK6zpAeA5bw",
+   "pniu": "89ADRED8KYGTH0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466762.035,
+    "maxX": 562668.1593000004,
+    "maxY": 3466822.385399999
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466792.285
+    ],
+    [
+     562648.852,
+     3466762.035
+    ],
+    [
+     562668.102,
+     3466792.285
+    ],
+    [
+     562648.852,
+     3466822.535
+    ],
+    [
+     562629.602,
+     3466792.285
+    ]
+   ],
+   "tracedAreaSqm": 1165,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 601
+  },
+  {
+   "khasraNo": "",
+   "plotId": "rcyGDElJSqySS-FfHS_JMw",
+   "pniu": "89AE51D8KJ8YH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466822.385399999,
+    "maxX": 562740.2445,
+    "maxY": 3466825.7381999996
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466824.135
+    ],
+    [
+     562718.408,
+     3466822.385
+    ],
+    [
+     562740.158,
+     3466824.135
+    ],
+    [
+     562718.408,
+     3466825.885
+    ],
+    [
+     562696.658,
+     3466824.135
+    ]
+   ],
+   "tracedAreaSqm": 76,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.147,
+   "chainageM": 661
+  },
+  {
+   "khasraNo": "6//12",
+   "plotId": "YTsCuBlRSdeB_OkNXIEXsw",
+   "pniu": "89AED5D8KYL5H0",
+   "reportedExtent": {
+    "minX": 562629.6020999998,
+    "minY": 3466822.385399999,
+    "maxX": 562693.3053000001,
+    "maxY": 3466882.7358
+   },
+   "ringUtm": [
+    [
+     562629.602,
+     3466852.635
+    ],
+    [
+     562661.477,
+     3466822.385
+    ],
+    [
+     562693.352,
+     3466852.635
+    ],
+    [
+     562661.477,
+     3466882.885
+    ],
+    [
+     562629.602,
+     3466852.635
+    ]
+   ],
+   "tracedAreaSqm": 1928,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 661
+  },
+  {
+   "khasraNo": "6//13/3",
+   "plotId": "JwM5H7SXTbe8h10fSZJBWA",
+   "pniu": "89AEC4D8KJ8KH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466825.7381999996,
+    "maxX": 562740.2445,
+    "maxY": 3466872.6774000004
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466849.238
+    ],
+    [
+     562718.408,
+     3466825.738
+    ],
+    [
+     562740.158,
+     3466849.238
+    ],
+    [
+     562718.408,
+     3466872.738
+    ],
+    [
+     562696.658,
+     3466849.238
+    ]
+   ],
+   "tracedAreaSqm": 1022,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.086,
+   "chainageM": 676
+  },
+  {
+   "khasraNo": "6//13/1",
+   "plotId": "Nc4EmJxJQaSe67Xino9UzQ",
+   "pniu": "89AEK6D8KJ53H0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466872.6774000004,
+    "maxX": 562718.4512999998,
+    "maxY": 3466882.7358
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466877.677
+    ],
+    [
+     562707.533,
+     3466872.677
+    ],
+    [
+     562718.408,
+     3466877.677
+    ],
+    [
+     562707.533,
+     3466882.677
+    ],
+    [
+     562696.658,
+     3466877.677
+    ]
+   ],
+   "tracedAreaSqm": 109,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.058,
+   "chainageM": 721
+  },
+  {
+   "khasraNo": "6//8",
+   "plotId": "_eDnJMNrTUincS7TIREWOA",
+   "pniu": "89AEU2D8KJCJH0",
+   "reportedExtent": {
+    "minX": 562696.6580999997,
+    "minY": 3466882.7358,
+    "maxX": 562763.7141000004,
+    "maxY": 3466943.0862000007
+   },
+   "ringUtm": [
+    [
+     562696.658,
+     3466912.986
+    ],
+    [
+     562730.158,
+     3466882.736
+    ],
+    [
+     562763.658,
+     3466912.986
+    ],
+    [
+     562730.158,
+     3466943.236
+    ],
+    [
+     562696.658,
+     3466912.986
+    ]
+   ],
+   "tracedAreaSqm": 2027,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 736
+  },
+  {
+   "khasraNo": "6//9/1",
+   "plotId": "V1gmPipXRTW6NcTTnTgTUg",
+   "pniu": "89AEU5D8KYRAH0",
+   "reportedExtent": {
+    "minX": 562666.4829000002,
+    "minY": 3466882.7358,
+    "maxX": 562693.3053000001,
+    "maxY": 3466943.0862000007
+   },
+   "ringUtm": [
+    [
+     562666.483,
+     3466912.986
+    ],
+    [
+     562679.858,
+     3466882.736
+    ],
+    [
+     562693.233,
+     3466912.986
+    ],
+    [
+     562679.858,
+     3466943.236
+    ],
+    [
+     562666.483,
+     3466912.986
+    ]
+   ],
+   "tracedAreaSqm": 809,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.15,
+   "chainageM": 736
+  },
+  {
+   "khasraNo": "6//9/2",
+   "plotId": "1yvKpHK-SmGeEm8n0FB52g",
+   "pniu": "89AERBD8KYJJH0",
+   "reportedExtent": {
+    "minX": 562646.3661000002,
+    "minY": 3466882.7358,
+    "maxX": 562666.4829000002,
+    "maxY": 3466922.9694
+   },
+   "ringUtm": [
+    [
+     562646.366,
+     3466902.861
+    ],
+    [
+     562656.366,
+     3466882.736
+    ],
+    [
+     562666.366,
+     3466902.861
+    ],
+    [
+     562656.366,
+     3466922.986
+    ],
+    [
+     562646.366,
+     3466902.861
+    ]
+   ],
+   "tracedAreaSqm": 403,
+   "recordedAreaSqm": null,
+   "vertices": 4,
+   "metresPerPixel": 0.25,
+   "extentErrorM": 0.117,
+   "chainageM": 736
+  }
+ ]
+}
