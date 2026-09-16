@@ -1,0 +1,16 @@
+{
+  "name": "Bhoomi Nayan Field Survey",
+  "short_name": "Bhoomi Field",
+  "description": "Record land surveys on the plot, with or without a signal.",
+  "start_url": "/field",
+  "scope": "/field",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f7fb",
+  "theme_color": "#0b3d91",
+  "lang": "en-IN",
+  "icons": [
+    { "src": "/icons/field-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/field-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
