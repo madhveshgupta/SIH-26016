@@ -1,0 +1,54 @@
+{
+ "state": "Rajasthan",
+ "lgd": "08",
+ "kind": "classic",
+ "base": "https://bhunaksha.rajasthan.gov.in/Viewmap",
+ "ok": true,
+ "probedAt": "2026-09-17T09:47:33.037Z",
+ "stateCode": "08",
+ "skipped": [],
+ "path": [
+  {
+   "code": "01",
+   "name": "01 अजमेर"
+  },
+  {
+   "code": "002",
+   "name": "अजमेर"
+  },
+  {
+   "code": "0745",
+   "name": "अजमेर तृतीय"
+  },
+  {
+   "code": "02920",
+   "name": "अजयसर"
+  },
+  {
+   "code": "11035",
+   "name": "अजयसर (चालु)"
+  },
+  {
+   "code": "001",
+   "name": "डिजिटाइज्ड"
+  }
+ ],
+ "levels": "01,002,0745,02920,11035,001,",
+ "gisCode": "0100207450292011035001",
+ "extent": {
+  "minX": 454894.54628847266,
+  "minY": 2919178.4909966514,
+  "maxX": 458906.1425398354,
+  "maxY": 2923711.0275771595
+ },
+ "srid": 32643,
+ "wmsCrs": "blank",
+ "sample": {
+  "khasraNo": "2216",
+  "plotId": "tiP0-rOVT_yB4kM7Tjr9GA",
+  "lat": 26.41257348604386,
+  "lng": 74.56760869187168,
+  "vertices": 24,
+  "extentErrorM": 0.113
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "state": "Lakshadweep",
+ "lgd": "31",
+ "kind": "classic",
+ "base": "https://bhunaksha.utl.gov.in/bhunaksha",
+ "ok": false,
+ "probedAt": "2026-09-17T09:49:38.849Z",
+ "failedAt": "extent",
+ "stateCode": "31",
+ "skipped": [
+  "01 Lakshadweep › 01 Kavaratti › 002 Suheli Cheriyakara › 1: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 01 Kavaratti › 002 Suheli Cheriyakara › 2: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 02 Agatti › 004 Agatti › 1: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 02 Agatti › 004 Agatti › 2: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 02 Agatti › 005 Bangaram › 1: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 02 Agatti › 005 Bangaram › 2: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 03 Chetlat › 010 Chetalat › 1: local sheet coordinates, not georeferenced",
+  "01 Lakshadweep › 03 Chetlat › 010 Chetalat › 2: local sheet coordinates, not georeferenced"
+ ],
+ "reason": "no georeferenced village with a traceable plot among those examined (8)"
+}

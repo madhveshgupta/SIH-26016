@@ -1,0 +1,11 @@
+{
+ "state": "Bihar",
+ "lgd": "10",
+ "kind": "classic",
+ "base": "https://bhunaksha.bihar.gov.in",
+ "ok": false,
+ "probedAt": "2026-09-17T09:49:38.847Z",
+ "failedAt": "levels",
+ "stateCode": "10",
+ "reason": "no districts listed"
+}

@@ -1,0 +1,44 @@
+{
+ "state": "Uttar Pradesh",
+ "lgd": "09",
+ "kind": "angular",
+ "base": "https://upbhunaksha.gov.in",
+ "ok": true,
+ "probedAt": "2026-09-17T09:37:04.861Z",
+ "levelLabels": [
+  "District",
+  "Tehsil",
+  "Village"
+ ],
+ "stateCode": "09",
+ "path": [
+  {
+   "code": "146",
+   "name": "आगरा"
+  },
+  {
+   "code": "00767",
+   "name": "किरावली"
+  },
+  {
+   "code": "124791",
+   "name": "अंगनपुरा"
+  }
+ ],
+ "gisCode": "14600767124791",
+ "extent": {
+  "minX": 177525.9411671369,
+  "minY": 3014765.4486693265,
+  "maxX": 179843.53705792525,
+  "maxY": 3015928.323171161
+ },
+ "srid": 32644,
+ "sample": {
+  "khasraNo": "186",
+  "plotId": "QMp_zcBjT0CmX8upZ7wXYg",
+  "lat": 27.2232479883371,
+  "lng": 77.7555326566181,
+  "vertices": 19,
+  "extentErrorM": 0.284
+ }
+}

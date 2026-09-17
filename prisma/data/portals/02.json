@@ -1,0 +1,44 @@
+{
+ "state": "Himachal Pradesh",
+ "lgd": "02",
+ "kind": "angular",
+ "base": "https://bhunakshahp.nic.in",
+ "ok": true,
+ "probedAt": "2026-09-17T09:42:35.462Z",
+ "levelLabels": [
+  "District",
+  "Tehsil",
+  "Village"
+ ],
+ "stateCode": "02",
+ "path": [
+  {
+   "code": "04",
+   "name": "ऊना"
+  },
+  {
+   "code": "03",
+   "name": "ऊना"
+  },
+  {
+   "code": "004401",
+   "name": "अरनियाला"
+  }
+ ],
+ "gisCode": "0403004401",
+ "extent": {
+  "minX": 619284.9797798583,
+  "minY": 3482692.4945658604,
+  "maxX": 623253.1486275546,
+  "maxY": 3484298.3033609763
+ },
+ "srid": 32643,
+ "sample": {
+  "khasraNo": "1914",
+  "plotId": "vyngvfP7QM2x9_zF-NfViA",
+  "lat": 31.479748491776288,
+  "lng": 76.27673383227838,
+  "vertices": 33,
+  "extentErrorM": 0.244
+ }
+}

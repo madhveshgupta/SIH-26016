@@ -1,0 +1,16 @@
+{
+ "state": "Jammu and Kashmir",
+ "lgd": "01",
+ "kind": "angular",
+ "base": "https://bhunaksha.jk.gov.in",
+ "ok": false,
+ "probedAt": "2026-09-17T09:47:33.015Z",
+ "failedAt": "levels",
+ "levelLabels": [
+  "District",
+  "Tehsil",
+  "Village"
+ ],
+ "stateCode": "01",
+ "reason": "levelvalue 500"
+}

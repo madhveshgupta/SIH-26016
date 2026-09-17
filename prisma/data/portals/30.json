@@ -1,0 +1,44 @@
+{
+ "state": "Goa",
+ "lgd": "30",
+ "kind": "classic",
+ "base": "https://bhunaksha.goa.gov.in/bhunaksha",
+ "ok": true,
+ "probedAt": "2026-09-17T09:37:34.233Z",
+ "stateCode": "30",
+ "path": [
+  {
+   "code": "01",
+   "name": "01 North Goa"
+  },
+  {
+   "code": "30010004",
+   "name": "30010004 BICHOLIM"
+  },
+  {
+   "code": "00010300",
+   "name": "00010300 Amone"
+  },
+  {
+   "code": "000VILLAGE",
+   "name": "000VILLAGE"
+  }
+ ],
+ "levels": "01,30010004,00010300,000VILLAGE,",
+ "gisCode": "013001000400010300000VILLAGE",
+ "extent": {
+  "minX": 389188.61207945494,
+  "minY": 1716219.5564323768,
+  "maxX": 392534.192359989,
+  "maxY": 1719269.102365839
+ },
+ "srid": 32643,
+ "sample": {
+  "khasraNo": "119/13",
+  "plotId": "rwa2k2HSSCmieikGoExJQg",
+  "lat": 15.534976549414584,
+  "lng": 73.98236914809596,
+  "vertices": 20,
+  "extentErrorM": 0.127
+ }
+}

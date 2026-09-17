@@ -1,0 +1,12 @@
+{
+ "state": "Andhra Pradesh",
+ "lgd": "28",
+ "kind": "classic",
+ "base": "https://bhunaksha.ap.gov.in/bhunakshalpm",
+ "ok": false,
+ "probedAt": "2026-09-17T09:49:38.848Z",
+ "failedAt": "levels",
+ "stateCode": "28",
+ "skipped": [],
+ "reason": "no georeferenced village with a traceable plot among those examined (0)"
+}

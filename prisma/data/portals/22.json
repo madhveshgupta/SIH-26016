@@ -1,0 +1,61 @@
+{
+ "state": "Chhattisgarh",
+ "lgd": "22",
+ "kind": "classic",
+ "base": "https://bhunaksha.cg.nic.in",
+ "ok": true,
+ "probedAt": "2026-09-17T09:47:33.038Z",
+ "stateCode": "22",
+ "skipped": [
+  "57 कबीरधाम › 08 कुकदूर › 01 कुकदूर › 028 अधचरा: no plot found inside the village extent",
+  "57 कबीरधाम › 08 कुकदूर › 01 कुकदूर › 009 अंमनिया: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 08 कुकदूर › 02 कोदवागोडान › 052 अंजबाइनबांह: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 08 कुकदूर › 02 कोदवागोडान › 082 अमरपुर: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 07 कुंडा › 03 कुंडा › 206 अखरा: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 07 कुंडा › 03 कुंडा › 214 ओडाडबरी: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 07 कुंडा › 01 दामापुर › 259 अतरियाखुर्द: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 07 कुंडा › 01 दामापुर › 247 अमलीमालगी: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 01 कवर्धा › 01 कवर्धा › 329 अमलीडीह: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 01 कवर्धा › 01 कवर्धा › 444 कवर्धा: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 01 कवर्धा › 02 छिरहा › 307 कुटकीपारा: local sheet coordinates, not georeferenced",
+  "57 कबीरधाम › 01 कवर्धा › 02 छिरहा › 308 कुटेली: local sheet coordinates, not georeferenced",
+  "60 कांकेर › 05 अन्तागढ़ › 01 अंतागढ › 042 अन्तागढ: local sheet coordinates, not georeferenced",
+  "60 कांकेर › 05 अन्तागढ़ › 01 अंतागढ › 011 अमोदी: local sheet coordinates, not georeferenced"
+ ],
+ "path": [
+  {
+   "code": "60",
+   "name": "60 कांकेर"
+  },
+  {
+   "code": "05",
+   "name": "05 अन्तागढ़"
+  },
+  {
+   "code": "03",
+   "name": "03 ताड़ोकी"
+  },
+  {
+   "code": "159",
+   "name": "159 आतुरबेड़ा"
+  }
+ ],
+ "levels": "60,05,03,159,",
+ "gisCode": "600503.159",
+ "extent": {
+  "minX": 522897.2593718499,
+  "minY": 2194534.3664312614,
+  "maxX": 525474.078560625,
+  "maxY": 2198004.0435530148
+ },
+ "srid": 32644,
+ "wmsCrs": "epsg",
+ "sample": {
+  "khasraNo": "305",
+  "plotId": "lUHExdjlQrmYYQC2qN3nLw",
+  "lat": 19.86559526907857,
+  "lng": 81.23600933551067,
+  "vertices": 302,
+  "extentErrorM": 0.617
+ }
+}

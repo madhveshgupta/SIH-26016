@@ -1,0 +1,52 @@
+{
+ "state": "Tripura",
+ "lgd": "16",
+ "kind": "classic",
+ "base": "https://bhunaksha.tripura.gov.in/bhunaksha",
+ "ok": true,
+ "probedAt": "2026-09-17T09:41:01.158Z",
+ "stateCode": "16",
+ "path": [
+  {
+   "code": "269",
+   "name": "269 Dhalai"
+  },
+  {
+   "code": "6686",
+   "name": "6686 Gandachhara"
+  },
+  {
+   "code": "151114",
+   "name": "151114 Raishyabari"
+  },
+  {
+   "code": "2473754",
+   "name": "2473754 Tuichakma"
+  },
+  {
+   "code": "272565",
+   "name": "272565 Kamalakhal"
+  },
+  {
+   "code": "06_02",
+   "name": "06_02"
+  }
+ ],
+ "levels": "269,6686,151114,2473754,272565,06_02,",
+ "gisCode": "2696686151114247375427256506_02",
+ "extent": {
+  "minX": 378931.50150000025,
+  "minY": 2598872.7520000003,
+  "maxX": 381309.37320000026,
+  "maxY": 2600459.1941
+ },
+ "srid": 32646,
+ "sample": {
+  "khasraNo": "76",
+  "plotId": "FudCSWTeQAW7ci-j9a-iCg",
+  "lat": 23.501350751771746,
+  "lng": 91.82338637142047,
+  "vertices": 640,
+  "extentErrorM": 0.349
+ }
+}

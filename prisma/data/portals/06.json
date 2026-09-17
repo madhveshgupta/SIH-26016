@@ -1,0 +1,49 @@
+{
+ "state": "Haryana",
+ "lgd": "06",
+ "kind": "angular",
+ "base": "https://maps.revenueharyana.gov.in",
+ "ok": true,
+ "probedAt": "2026-09-17T09:42:35.439Z",
+ "levelLabels": [
+  "District",
+  "Tehsil",
+  "Village",
+  "Map Type"
+ ],
+ "stateCode": "06",
+ "path": [
+  {
+   "code": "01",
+   "name": "Ambala"
+  },
+  {
+   "code": "002",
+   "name": "Barara"
+  },
+  {
+   "code": "00059",
+   "name": "Ahoya Hinduwan(057631)"
+  },
+  {
+   "code": "R",
+   "name": "VM"
+  }
+ ],
+ "gisCode": "0100200059R",
+ "extent": {
+  "minX": 694717.7181231604,
+  "minY": 3338555.520091307,
+  "maxX": 698886.5839122555,
+  "maxY": 3341325.765451299
+ },
+ "srid": 32643,
+ "sample": {
+  "khasraNo": "32//4",
+  "plotId": "Z44EGHQqRoGnzvv0h5TlQw",
+  "lat": 30.175163998555337,
+  "lng": 77.04418601093481,
+  "vertices": 7,
+  "extentErrorM": 0.25
+ }
+}

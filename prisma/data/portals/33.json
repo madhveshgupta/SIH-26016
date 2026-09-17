@@ -1,0 +1,11 @@
+{
+ "state": "Tamil Nadu",
+ "lgd": "33",
+ "kind": "classic",
+ "base": "https://collabland-tn.gov.in",
+ "ok": false,
+ "probedAt": "2026-09-17T09:49:38.848Z",
+ "failedAt": "levels",
+ "stateCode": "33",
+ "reason": "no districts listed"
+}

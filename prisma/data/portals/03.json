@@ -1,0 +1,48 @@
+{
+ "state": "Punjab",
+ "lgd": "03",
+ "kind": "classic",
+ "base": "https://gisbhunaksha.punjab.gov.in",
+ "ok": true,
+ "probedAt": "2026-09-17T09:37:34.210Z",
+ "stateCode": "03",
+ "path": [
+  {
+   "code": "01",
+   "name": "01 ਜਲੰਧਰ"
+  },
+  {
+   "code": "002",
+   "name": "002 ਜਲੰਧਰ-2"
+  },
+  {
+   "code": "014",
+   "name": "014 ਵਰਿਆਣਾ"
+  },
+  {
+   "code": "129",
+   "name": "129 ਗਿੱਲ"
+  },
+  {
+   "code": "30438",
+   "name": "30438 ਅਲੀ ਚੱਕ"
+  }
+ ],
+ "levels": "01,002,014,129,30438,",
+ "gisCode": "0100201412930438",
+ "extent": {
+  "minX": 544815.926697745,
+  "minY": 3462084.225416854,
+  "maxX": 546339.6681007477,
+  "maxY": 3463710.864324733
+ },
+ "srid": 32643,
+ "sample": {
+  "khasraNo": "11//12",
+  "plotId": "lDsVWK5tQKKipjeYrNr_DA",
+  "lat": 31.29946145524874,
+  "lng": 75.47889476813275,
+  "vertices": 4,
+  "extentErrorM": 0.056
+ }
+}
