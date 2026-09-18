@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "trainedAt": "2026-09-19T11:25:54.586991+00:00",
+  "rows": 50000,
+  "features": [
+    "parcels",
+    "area_ha",
+    "owners",
+    "owners_per_parcel",
+    "is_urban",
+    "circle_rate_per_ha",
+    "multiplier_factor",
+    "consent_pct",
+    "objections",
+    "objections_per_100_parcels",
+    "objection_window_days",
+    "digitised",
+    "project_type_DEFENCE",
+    "project_type_HIGHWAY",
+    "project_type_INDUSTRIAL_CORRIDOR",
+    "project_type_IRRIGATION",
+    "project_type_MINING",
+    "project_type_OTHER",
+    "project_type_RAILWAY",
+    "project_type_RENEWABLE_ENERGY",
+    "project_type_URBAN_DEVELOPMENT",
+    "act_LARR_2013",
+    "act_NH_ACT_1956"
+  ],
+  "dataset": {
+    "source": "synthetic, calibrated to published government figures",
+    "calibration": [
+      "CAG Performance Audit 2021 Table 3.2 \u2014 stage durations of 11 to 46 months",
+      "CAG Table 3.3 \u2014 observed cost-of-delay escalation per sqm",
+      "Parliament \u2014 174,387 pending compensation cases across ~1,467 NH projects",
+      "PIB \u2014 9,464 notifications 2018-2022; 2,842 in FY18-19 against ~1,000/year before",
+      "LARR Act 2013 \u2014 statutory windows, solatium and First Schedule multipliers"
+    ],
+    "why_synthetic": "No public dataset of case-level acquisition outcomes exists; those records name landowners and their compensation and are protected under the DPDP Act 2023."
+  },
+  "models": {
+    "delay_risk": {
+      "task": "Will this case miss its statutory deadline?",
+      "algorithm": "GradientBoostingClassifier",
+      "auc": 0.8965,
+      "f1": 0.8331,
+      "accuracy": 0.8078,
+      "positiveRate": 0.5631,
+      "confusion": {
+        "0": {
+          "precision": 0.7973268529769137,
+          "recall": 0.7509727626459144,
+          "f1-score": 0.7734559170202735,
+          "support": 4369.0
+        },
+        "1": {
+          "precision": 0.8151231945624469,
+          "recall": 0.851891315929675,
+          "f1-score": 0.8331017714484196,
+          "support": 5631.0
+        },
+        "accuracy": 0.8078,
+        "macro avg": {
+          "precision": 0.8062250237696803,
+          "recall": 0.8014320392877947,
+          "f1-score": 0.8032788442343466,
+          "support": 10000.0
+        },
+        "weighted avg": {
+          "precision": 0.8073479729237274,
+          "recall": 0.8078,
+          "f1-score": 0.8070424976487626,
+          "support": 10000.0
+        }
+      }
+    },
+    "delay_days": {
+      "task": "If it slips, by how many days?",
+      "algorithm": "GradientBoostingRegressor",
+      "mae_days": 143.0,
+      "r2": 0.4344,
+      "trainedOn": 28153
+    },
+    "compensation_per_ha": {
+      "task": "Likely final compensation per hectare, at proposal time",
+      "algorithm": "GradientBoostingRegressor",
+      "mae_rupees": 5882421.19,
+      "mape_pct": 15.2,
+      "r2": 0.8837
+    },
+    "litigation_risk": {
+      "task": "Will this case end up in court?",
+      "algorithm": "GradientBoostingClassifier",
+      "auc": 0.6159,
+      "f1": 0.1495,
+      "accuracy": 0.6906,
+      "positiveRate": 0.3201
+    },
+    "anomaly": {
+      "task": "Is this award unlike anything else on the books?",
+      "algorithm": "IsolationForest",
+      "contamination": 0.03,
+      "flagged": 1500,
+      "flaggedPct": 3.0,
+      "scoreRange": [
+        -0.1345,
+        0.1467
+      ]
+    }
+  },
+  "importances": {
+    "delay_risk": {
+      "objections_per_100_parcels": 0.49217,
+      "digitised": 0.26988,
+      "project_type_RENEWABLE_ENERGY": 0.09536,
+      "objections": 0.03454,
+      "project_type_DEFENCE": 0.02309,
+      "consent_pct": 0.02181,
+      "project_type_URBAN_DEVELOPMENT": 0.01643,
+      "project_type_IRRIGATION": 0.01178,
+      "project_type_OTHER": 0.00641,
+      "parcels": 0.006
+    },
+    "compensation_per_ha": {
+      "circle_rate_per_ha": 0.83287,
+      "multiplier_factor": 0.07516,
+      "objections_per_100_parcels": 0.04732,
+      "digitised": 0.02816,
+      "objections": 0.00456,
+      "project_type_RENEWABLE_ENERGY": 0.00448,
+      "consent_pct": 0.00183,
+      "project_type_URBAN_DEVELOPMENT": 0.00115,
+      "project_type_IRRIGATION": 0.00114,
+      "area_ha": 0.00071
+    },
+    "litigation_risk": {
+      "objections_per_100_parcels": 0.58781,
+      "is_urban": 0.10439,
+      "area_ha": 0.06158,
+      "circle_rate_per_ha": 0.05576,
+      "multiplier_factor": 0.04708,
+      "consent_pct": 0.03589,
+      "owners_per_parcel": 0.03495,
+      "owners": 0.02351,
+      "parcels": 0.02287,
+      "objections": 0.01006
+    }
+  },
+  "humanLabels": {
+    "parcels": "number of plots",
+    "area_ha": "area being acquired",
+    "owners": "number of owners",
+    "owners_per_parcel": "owners per plot (joint holdings)",
+    "is_urban": "urban land",
+    "circle_rate_per_ha": "circle rate",
+    "multiplier_factor": "First Schedule multiplier",
+    "consent_pct": "landowner consent",
+    "objections": "objections filed",
+    "objections_per_100_parcels": "objections per 100 plots",
+    "objection_window_days": "objection window (21d NH Act / 60d LARR)",
+    "digitised": "case handled digitally",
+    "project_type_": "project type",
+    "act_": "governing Act"
+  }
+}
